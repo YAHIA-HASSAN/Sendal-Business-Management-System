@@ -8,28 +8,17 @@
 			<column name="seller_id" type="UUID" mandatory="y" />
 			<column name="buyer_id" type="UUID" mandatory="y" />
 			<column name="notes" type="VARCHAR" length="600" />
-			<column name="warranty" type="VARCHAR" length="255" />
 			<column name="amount" type="NUMERIC" length="12" decimal="2" mandatory="y" />
 			<column name="discount_amount" type="NUMERIC" length="12" decimal="2" />
 			<index name="pk_bill" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
-			<fk name="fk_bill_buyer" to_schema="Sendal Business Management System" to_table="buyer" type="NonIdentifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+			<fk name="fk_bill_buyer" to_schema="Sendal Business Management System" to_table="customer" type="NonIdentifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
 				<fk_column name="buyer_id" pk="id" />
 			</fk>
 			<fk name="fk_bill_user" to_schema="Sendal Business Management System" to_table="user" type="NonIdentifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
 				<fk_column name="seller_id" pk="id" />
 			</fk>
-		</table>
-		<table name="buyer" prior="buye" >
-			<column name="id" type="UUID" mandatory="y" />
-			<column name="name" type="VARCHAR" length="250" mandatory="y" />
-			<column name="phone_number" type="VARCHAR" length="30" mandatory="y" />
-			<column name="type" type="VARCHAR" length="50" mandatory="y" />
-			<column name="remaining_amount_due" type="NUMERIC" length="12" decimal="2" />
-			<index name="pk_buyer" unique="PRIMARY_KEY" >
-				<column name="id" />
-			</index>
 		</table>
 		<table name="buying_price_history" prior="buying_price_histor" >
 			<column name="id" type="UUID" mandatory="y" />
@@ -47,14 +36,24 @@
 				<fk_column name="user_id" pk="id" />
 			</fk>
 		</table>
+		<table name="cash_drawer" prior="cash_draw" >
+			<column name="id" type="UUID" mandatory="y" />
+			<column name="balance" type="NUMERIC" length="12" decimal="2" mandatory="y" />
+			<column name="last_cash_movement" prior="last_update" type="UUID" mandatory="y" />
+			<index name="pk_cash_drawer" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_cash_drawer_cash_movement" to_schema="Sendal Business Management System" to_table="cash_movement" type="NonIdentifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="last_cash_movement" pk="id" />
+			</fk>
+		</table>
 		<table name="cash_movement" prior="cash_move" >
 			<column name="id" type="UUID" mandatory="y" />
 			<column name="date_time" type="DATETIME" mandatory="y" />
 			<column name="amount" type="NUMERIC" length="12" decimal="2" mandatory="y" />
 			<column name="type" type="BOOLEAN" mandatory="y" />
-			<column name="direction" type="VARCHAR" length="50" mandatory="y" />
+			<column name="reason" prior="direction" type="VARCHAR" length="50" mandatory="y" />
 			<column name="user_id" type="UUID" mandatory="y" />
-			<column name="cash_drawer_balance" type="NUMERIC" length="12" decimal="2" mandatory="y" />
 			<column name="bill_id" type="UUID" mandatory="y" />
 			<index name="pk_cash_movement" unique="PRIMARY_KEY" >
 				<column name="id" />
@@ -65,6 +64,14 @@
 			<fk name="fk_cash_movement_bill" to_schema="Sendal Business Management System" to_table="bill" type="NonIdentifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
 				<fk_column name="bill_id" pk="id" />
 			</fk>
+		</table>
+		<table name="customer" prior="buyer" >
+			<column name="id" type="UUID" mandatory="y" />
+			<column name="name" type="VARCHAR" length="250" mandatory="y" />
+			<column name="phone_number" type="VARCHAR" length="30" mandatory="y" />
+			<index name="pk_buyer" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
 		</table>
 		<table name="payment_history" prior="payment_histor" >
 			<column name="id" type="UUID" mandatory="y" />
@@ -84,8 +91,9 @@
 			<column name="name" type="VARCHAR" length="250" mandatory="y" />
 			<column name="code" type="VARCHAR" length="50" mandatory="y" />
 			<column name="active" type="BOOLEAN" mandatory="y" />
-			<column name="type" type="VARCHAR" length="100" mandatory="y" />
+			<column name="category" prior="type" type="VARCHAR" length="100" mandatory="y" />
 			<column name="stock" type="INT" mandatory="y" />
+			<column name="warranty" prior="warrenty" type="VARCHAR" />
 			<index name="pk_product" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -127,7 +135,6 @@
 		</table>
 		<table name="stock_movement" prior="stock_movemen" >
 			<column name="id" type="UUID" mandatory="y" />
-			<column name="direction" type="VARCHAR" length="50" mandatory="y" />
 			<column name="type" type="BOOLEAN" mandatory="y" />
 			<column name="quantity" type="INT" mandatory="y" />
 			<column name="product_id" type="UUID" mandatory="y" />
@@ -162,16 +169,17 @@
 	</schema>
 	<diagram_group name="Default" id="f5786b63-d98e-4f36-bf11-ab914a90cf0b" >
 		<diagram name="Default Diagram" id="19272af4-6f36-450f-843d-504d1a5bad76" show_relation="columns" >
-			<entity schema="Sendal Business Management System" name="bill" color="C4E0F9" x="361" y="475" />
-			<entity schema="Sendal Business Management System" name="buyer" color="C4E0F9" x="76" y="741" />
-			<entity schema="Sendal Business Management System" name="buying_price_history" color="008080" x="1178" y="589" />
-			<entity schema="Sendal Business Management System" name="cash_movement" color="C4E0F9" x="247" y="95" />
-			<entity schema="Sendal Business Management System" name="payment_history" color="C4E0F9" x="57" y="494" />
-			<entity schema="Sendal Business Management System" name="product" color="008080" x="1007" y="855" />
-			<entity schema="Sendal Business Management System" name="selling_price_history" color="008080" x="912" y="589" />
-			<entity schema="Sendal Business Management System" name="sold_item" color="C4E0F9" x="399" y="836" />
-			<entity schema="Sendal Business Management System" name="stock_movement" color="008080" x="703" y="703" />
-			<entity schema="Sendal Business Management System" name="user" color="C7F4BE" x="779" y="209" />
+			<entity schema="Sendal Business Management System" name="bill" color="C4E0F9" x="551" y="475" />
+			<entity schema="Sendal Business Management System" name="buying_price_history" color="008080" x="1368" y="589" />
+			<entity schema="Sendal Business Management System" name="cash_drawer" color="C1D8EE" x="57" y="95" />
+			<entity schema="Sendal Business Management System" name="cash_movement" color="C4E0F9" x="437" y="95" />
+			<entity schema="Sendal Business Management System" name="customer" color="C4E0F9" x="266" y="741" />
+			<entity schema="Sendal Business Management System" name="payment_history" color="C4E0F9" x="247" y="494" />
+			<entity schema="Sendal Business Management System" name="product" color="008080" x="1197" y="855" />
+			<entity schema="Sendal Business Management System" name="selling_price_history" color="008080" x="1102" y="589" />
+			<entity schema="Sendal Business Management System" name="sold_item" color="C4E0F9" x="589" y="836" />
+			<entity schema="Sendal Business Management System" name="stock_movement" color="008080" x="893" y="703" />
+			<entity schema="Sendal Business Management System" name="user" color="C7F4BE" x="969" y="209" />
 			<group name="Inventory" color="008080" >
 				<entity schema="Sendal Business Management System" name="buying_price_history" />
 				<entity schema="Sendal Business Management System" name="product" />
@@ -180,8 +188,9 @@
 			</group>
 			<group name="POS" color="C4E0F9" >
 				<entity schema="Sendal Business Management System" name="bill" />
-				<entity schema="Sendal Business Management System" name="buyer" />
+				<entity schema="Sendal Business Management System" name="cash_drawer" />
 				<entity schema="Sendal Business Management System" name="cash_movement" />
+				<entity schema="Sendal Business Management System" name="customer" />
 				<entity schema="Sendal Business Management System" name="payment_history" />
 				<entity schema="Sendal Business Management System" name="sold_item" />
 			</group>
