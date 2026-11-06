@@ -65,6 +65,15 @@
 				<fk_column name="bill_id" pk="id" />
 			</fk>
 		</table>
+		<table name="category" prior="categor" >
+			<column name="name" type="VARCHAR" length="250" mandatory="y" />
+			<index name="pk_category" unique="PRIMARY_KEY" >
+				<column name="name" />
+			</index>
+			<fk name="fk_category_product" to_schema="Sendal Business Management System" to_table="product" type="NonIdentifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="name" pk="category" />
+			</fk>
+		</table>
 		<table name="customer" prior="buyer" >
 			<column name="id" type="UUID" mandatory="y" />
 			<column name="name" type="VARCHAR" length="250" mandatory="y" />
@@ -99,6 +108,9 @@
 			</index>
 			<index name="unq_product" unique="UNIQUE_KEY" >
 				<column name="code" />
+			</index>
+			<index name="unq_product_category" unique="UNIQUE_KEY" >
+				<column name="category" />
 			</index>
 		</table>
 		<table name="selling_price_history" prior="buying_price_history_0" >
@@ -173,6 +185,7 @@
 			<entity schema="Sendal Business Management System" name="buying_price_history" color="008080" x="1368" y="589" />
 			<entity schema="Sendal Business Management System" name="cash_drawer" color="C1D8EE" x="57" y="95" />
 			<entity schema="Sendal Business Management System" name="cash_movement" color="C4E0F9" x="437" y="95" />
+			<entity schema="Sendal Business Management System" name="category" color="C1D8EE" x="1406" y="1007" />
 			<entity schema="Sendal Business Management System" name="customer" color="C4E0F9" x="266" y="741" />
 			<entity schema="Sendal Business Management System" name="payment_history" color="C4E0F9" x="247" y="494" />
 			<entity schema="Sendal Business Management System" name="product" color="008080" x="1197" y="855" />
@@ -182,6 +195,7 @@
 			<entity schema="Sendal Business Management System" name="user" color="C7F4BE" x="969" y="209" />
 			<group name="Inventory" color="008080" >
 				<entity schema="Sendal Business Management System" name="buying_price_history" />
+				<entity schema="Sendal Business Management System" name="category" />
 				<entity schema="Sendal Business Management System" name="product" />
 				<entity schema="Sendal Business Management System" name="selling_price_history" />
 				<entity schema="Sendal Business Management System" name="stock_movement" />

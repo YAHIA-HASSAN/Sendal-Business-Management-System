@@ -242,7 +242,7 @@ table.sub td.d{color:var(--muted);}
 
 <header class='topbar'>
 <div class='brand'><svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path style='stroke:none;fill:#5d5d5d' d='M2.41,6.80 17.39,0.35 26.83,7.21 28.32,24.45 12.62,29.77 1.74,23.96'/><path style='stroke:none;fill:#efefef' d='M 2.21, 6.45  9.36, 3.49  9.42,11.63  2.04,14.42'/><path style='stroke:none;fill:#efefef' d='M10.23, 3.14 17.39, 0.17 17.68, 8.59 10.29,11.28'/><path style='stroke:none;fill:#d2d2d2' d='M17.44, 0.17 21.59, 3.55 22.36,11.43 17.76,8.63'/><path style='stroke:none;fill:#d2d2d2' d='M22.67, 4.33 26.98, 7.06 27.65,14.77 23.20,11.77'/><path style='stroke:none;fill:#efefef' d='M1.89,15.58  9.39,12.65  9.48,21.14  1.57,24.10'/><path style='stroke:none;fill:#17afde' d='M10.38,12.36 17.70, 9.51 18.11,18.37 10.32 20.96'/><path style='stroke:none;fill:#1389ad' d='M17.73, 9.59 22.41,12.47 22.82,21.14 18.05,18.34'/><path style='stroke:none;fill:#d2d2d2' d='M23.26,12.94 27.62,15.70 28.42,24.54 23.69,21.60'/><path style='stroke:none;fill:#828282' d='M1.57,24.19  9.45,21.22 14.30,24.40  6.80,26.80'/><path style='stroke:none;fill:#0c485c' d='M10.47,20.90 18.11,18.32 22.82,21.19 15.20,23.81'/><path style='stroke:none;fill:#828282' d='M23.69,21.63 28.32,24.65 20.87,27.07 15.84,24.30'/><path style='stroke:none;fill:#828282' d='M14.94,24.68 19.80,27.41 12.59,29.97  7.73,27.21'/></svg>
-<span class='names'><span class='t'>Sendal Business Management System</span><span class='s'>Logical Design · 11 entities · generated 6 Nov 2026</span></span></div>
+<span class='names'><span class='t'>Sendal Business Management System</span><span class='s'>Logical Design · 12 entities · generated 6 Nov 2026</span></span></div>
 <div class='searchbox'><svg class='ic ' width='16' height='16'><use href='#ic-search' width='16' height='16'/></svg><input type='text' oninput='search(this.value)' placeholder='Search tables, columns, comments&hellip;'/></div>
 <div class='spacer'></div>
 <a class='credit' href='https://dbschema.com'>Generated using DbSchema</a>
@@ -253,7 +253,7 @@ table.sub td.d{color:var(--muted);}
 <div class='diagram-head'><svg class='ic accent' width='16' height='16'><use href='#ic-layout' width='16' height='16'/></svg><h3>Default Diagram</h3><span class='hint'>drag to pan &middot; ctrl + wheel to zoom &middot; hover a column for its comment</span>
 </div>
 <div class='svgContainer'>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1653' height='1250' viewBox='0 0 1653 1250' >
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1653' height='1288' viewBox='0 0 1653 1288' >
   <script type='text/ecmascript'>
   <![CDATA[
   function hghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','highlight');  }  }
@@ -454,8 +454,8 @@ table.sub td.d{color:var(--muted);}
 
 <!-- == Shape Colors == -->
 <!-- == Desktop == -->
-<rect x='0' y='0' width='1653' height='1250' rx='10' ry='10' style='fill:url(#layoutBgA); stroke:none; stroke-width:.7px; cursor:move;' />
-<rect x='1' y='1' width='1651' height='1248' rx='10' ry='10' style='fill:url(#layoutBgEval);' />
+<rect x='0' y='0' width='1653' height='1288' rx='10' ry='10' style='fill:url(#layoutBgA); stroke:none; stroke-width:.7px; cursor:move;' />
+<rect x='1' y='1' width='1651' height='1286' rx='10' ry='10' style='fill:url(#layoutBgEval);' />
 
 <!-- == Legend == -->
 <g transform='translate(10,10)'>
@@ -469,7 +469,7 @@ Zoom with CTRL + mouse wheel, pan by dragging the diagram.</title></g>
 
 <g transform='translate(0,110)'>
 <!-- == Group 'Inventory' == -->
-<rect class='grp' style='fill:#DEF4F4;stroke:#AEE2E2' x='877' y='525' width='735' height='536' rx='8' ry='8' />
+<rect class='grp' style='fill:#DEF4F4;stroke:#AEE2E2' x='877' y='525' width='735' height='574' rx='8' ry='8' />
 <text class='grp' x='891' y='544' style='fill:#4A8F8F;'>Inventory</text>
 <!-- == Group 'POS' == -->
 <rect class='grp' style='fill:#DEE9F4;stroke:#AEC9E2' x='41' y='31' width='716' height='973' rx='8' ry='8' />
@@ -594,6 +594,14 @@ stock_movement &#10132; bill ( bill_id -&gt; id )
 stock_movement &#10132; bill ( bill_id -&gt; id )
 </title></path>
 <text x='846' y='697' transform='rotate(0 846,697)' class='relName'>bill&#95;id</text>
+<!-- == Fk 'l1-category_fk_category_product' == -->
+<path id='l1-category_fk_category_product'  onmouseover="hghl(['l1-category_fk_category_product','l1-Sendal Business Management System.category.name','l1-Sendal Business Management System.product.category'])" onmouseout="uhghl(['l1-category_fk_category_product','l1-Sendal Business Management System.category.name','l1-Sendal Business Management System.product.category'])" transform='translate(10,0)' class='unhighlight' d='M 1387,1007L 1311,1007' ><title>&#x1F517;  Foreign Key fk_category_product
+category &#10132; product ( name -&gt; category )
+</title></path>
+<path transform='translate(10,0)' marker-start='url(#ZeroMore)' marker-end='url(#Arrow)'    d='M 1387,1007L 1311,1007' ><title>&#x1F517;  Foreign Key fk_category_product
+category &#10132; product ( name -&gt; category )
+</title></path>
+<text x='1362' y='1001' transform='rotate(0 1362,1001)' class='relName'>name</text>
 <!-- == Table 'buying_price_history' == -->
 <rect id='l1&#45;depict&#95;Sendal Business Management System&#46;buying&#95;price&#95;history' class='entity' x='1368' y='580' width='228' height='152' rx='4' ry='4' />
 <rect x='1368' y='580' width='228' height='8' rx='4' ry='4' style='stroke-width:0;fill:url(#ttl_008080);'/>
@@ -837,13 +845,25 @@ Referred by stock_movement ( product_id -&gt; id ) </title><rect class='iconPlat
      * varchar(50)</title><text id='l1&#45;Sendal Business Management System&#46;product&#46;code' x='1220' y='940'>code</text></g></a>
 <use class='mk-type' x='1297' y='926' width='13' height='13' href='#ty-text_fields'/>  <use class='mk-nn' x='1197' y='948' width='7' height='7' href='#nn'/><a href='#Sendal+Business+Management+System.product.active'><g><title>&#10697;  active
      * boolean</title><text id='l1&#45;Sendal Business Management System&#46;product&#46;active' x='1220' y='959'>active</text></g></a>
-<use class='mk-type' x='1297' y='945' width='13' height='13' href='#ty-toggle_on'/>  <use class='mk-nn' x='1197' y='967' width='7' height='7' href='#nn'/><a href='#Sendal+Business+Management+System.product.category'><g><title>&#10697;  category
-     * varchar(100)</title><text id='l1&#45;Sendal Business Management System&#46;product&#46;category' x='1220' y='978'>category</text></g></a>
-<use class='mk-type' x='1297' y='964' width='13' height='13' href='#ty-text_fields'/>  <use class='mk-nn' x='1197' y='986' width='7' height='7' href='#nn'/><a href='#Sendal+Business+Management+System.product.stock'><g><title>&#10697;  stock
+<use class='mk-type' x='1297' y='945' width='13' height='13' href='#ty-toggle_on'/>  <use class='mk-nn' x='1197' y='967' width='7' height='7' href='#nn'/><g><title>&#x1F50D;  Unq unq_product_category ( category ) </title><use class='mk-unq' x='1199' y='964' width='13' height='13' href='#unq'/></g><a href='#Sendal+Business+Management+System.product.category'><g><title>&#10697;  category
+     * varchar(100)
+ &#8601; category( name )</title><text id='l1&#45;Sendal Business Management System&#46;product&#46;category' x='1220' y='978' onmouseover="hghl(['l1-category_fk_category_product','l1-Sendal Business Management System.category.name'])" onmouseout="uhghl(['l1-category_fk_category_product','l1-Sendal Business Management System.category.name'])">category</text></g></a>
+<a href='#Sendal+Business+Management+System.product.category'><g><title>&#x1F517;  Referred by category ( name -&gt; category ) </title><rect class='iconPlate' x='1296' y='963' width='15' height='15' rx='4' ry='4'/><use class='mk-ref' x='1297' y='964' width='13' height='13' href='#ref'/></g></a>
+  <use class='mk-nn' x='1197' y='986' width='7' height='7' href='#nn'/><a href='#Sendal+Business+Management+System.product.stock'><g><title>&#10697;  stock
      * int</title><text id='l1&#45;Sendal Business Management System&#46;product&#46;stock' x='1220' y='997'>stock</text></g></a>
 <use class='mk-type' x='1297' y='983' width='13' height='13' href='#ty-functions'/>  <a href='#Sendal+Business+Management+System.product.warranty'><g><title>&#10697;  warranty
      varchar</title><text id='l1&#45;Sendal Business Management System&#46;product&#46;warranty' x='1220' y='1016'>warranty</text></g></a>
 <use class='mk-type' x='1297' y='1002' width='13' height='13' href='#ty-text_fields'/>
+<!-- == Table 'category' == -->
+<rect id='l1&#45;depict&#95;Sendal Business Management System&#46;category' class='entity' x='1406' y='998' width='95' height='76' rx='4' ry='4' />
+<rect x='1406' y='998' width='95' height='8' rx='4' ry='4' style='stroke-width:0;fill:url(#ttl_C1D8EE);'/>
+<rect x='1406' y='1002' width='95' height='29' style='stroke-width:0;fill:url(#tbg_C1D8EE);'/>
+<a href='#Sendal+Business+Management+System.category'><g><title>Entity Sendal Business Management System.category</title><text id='l1&#45;depict&#45;Sendal Business Management System&#46;category' x='1422' y='1020' class='tableHeader'>category</text></g></a>
+  <use class='mk-nn' x='1406' y='1043' width='7' height='7' href='#nn'/><g><title>&#x1F511;  Pk pk_category ( name ) </title><use class='mk-pk' x='1408' y='1040' width='13' height='13' href='#pk'/></g><a href='#Sendal+Business+Management+System.category.name'><g><title>&#10697;  name
+     * varchar(250)
+ &#8599; product( category )</title><text id='l1&#45;Sendal Business Management System&#46;category&#46;name' x='1429' y='1054' onmouseover="hghl(['l1-category_fk_category_product','l1-Sendal Business Management System.product.category'])" onmouseout="uhghl(['l1-category_fk_category_product','l1-Sendal Business Management System.product.category'])" class='colPk'>name</text></g></a>
+<a href='#Sendal+Business+Management+System.category.name'><g><title>&#x1F517;  References product ( name -&gt; category ) </title><rect class='iconPlate' x='1486' y='1039' width='15' height='15' rx='4' ry='4'/><use class='mk-fk' x='1487' y='1040' width='13' height='13' href='#fk'/></g></a>
+
 </g></svg></div>
 <div class='legend'>
 <span class='item'><svg class='ic pk' width='15' height='15'><use href='#pk' width='15' height='15'/></svg> Primary key</span><span class='item'><svg class='ic unq' width='15' height='15'><use href='#unq' width='15' height='15'/></svg> Unique</span><span class='item'><svg class='ic idx' width='15' height='15'><use href='#idx' width='15' height='15'/></svg> Index</span><span class='item'><span class='plate'><svg class='ic fk' width='15' height='15'><use href='#fk' width='15' height='15'/></svg></span> Relation</span><span class='item'><span class='plate'><svg class='ic ref' width='15' height='15'><use href='#ref' width='15' height='15'/></svg></span> Referenced by</span><span class='item'><svg class='ic nn' width='12' height='12'><use href='#nn' width='12' height='12'/></svg> Mandatory</span></div>
@@ -1090,6 +1110,34 @@ Referred by stock_movement ( product_id -&gt; id ) </title><rect class='iconPlat
 <div class='pad-b'></div>
 </section>
 
+<section class='card entity' id='Sendal+Business+Management+System.category'>
+<div class='thead'><svg class='ic accent' width='20' height='20'><use href='#ic-table' width='20' height='20'/></svg><h3>category</h3><span class='badge'>Entity</span><span class='path'>Sendal Business Management System&#46;category</span><div class='actions'>
+<a class='chipbtn' href='#layout1' onclick="return showInDiagram('layout1','l1&#45;depict&#95;Sendal Business Management System&#46;category')"><svg class='ic ' width='16' height='16'><use href='#ic-layout' width='16' height='16'/></svg>Show in diagram</a></div>
+</div>
+<div class='facts'><span><b>1</b> attribute</span><span><b>1</b> primary key</span><span><b>1</b> index</span><span><b>1</b> relation</span></div>
+<div class='tablewrap'><table class='cols'>
+<thead><tr><th class='flags'></th><th class='cname'>Attribute</th><th class='type'>Data Type</th><th class='attrs'>Constraints</th></tr></thead>
+<tbody>
+	<tr>
+		<td class='flags'><svg class='ic nn' width='11' height='11'><title>Mandatory</title><use href='#nn' width='11' height='11'/></svg><svg class='ic pk' width='15' height='15'><title>Primary key</title><use href='#pk' width='15' height='15'/></svg><span class='plate'><svg class='ic fk' width='15' height='15'><title>Relation</title><use href='#fk' width='15' height='15'/></svg></span></td>
+		<td class='cname' id='Sendal+Business+Management+System.category.name'>name</td>
+		<td class='type'>VARCHAR&#40;250&#41;</td>
+		<td class='attrs'><span class='tag required'>NOT NULL</span></td>
+	</tr>
+</tbody></table></div>
+<div class='subsec'>
+<h4><svg class='ic idx' width='15' height='15'><use href='#idx' width='15' height='15'/></svg> Indexes</h4>
+<table class='sub'>
+<tr><td class='k'><svg class='ic pk' width='15' height='15'><use href='#pk' width='15' height='15'/></svg></td><td class='n'>pk&#95;category</td><td class='d'>Primary Key ON (name)</td></tr>
+</table>
+<h4><span class='plate'><svg class='ic fk' width='15' height='15'><use href='#fk' width='15' height='15'/></svg></span> Relation</h4>
+<table class='sub'>
+<tr><td class='k'><span class='plate'><svg class='ic fk' width='15' height='15'><use href='#fk' width='15' height='15'/></svg></span></td><td class='n'>fk&#95;category&#95;product</td><td class='d rel'>name <span class='arrow'>&#8594;</span> <a href='#Sendal+Business+Management+System.product'>product</a>.category</td></tr>
+</table>
+</div>
+<div class='pad-b'></div>
+</section>
+
 <section class='card entity' id='Sendal+Business+Management+System.customer'>
 <div class='thead'><svg class='ic accent' width='20' height='20'><use href='#ic-table' width='20' height='20'/></svg><h3>customer</h3><span class='badge'>Entity</span><span class='path'>Sendal Business Management System&#46;customer</span><div class='actions'>
 <a class='chipbtn' href='#layout1' onclick="return showInDiagram('layout1','l1&#45;depict&#95;Sendal Business Management System&#46;customer')"><svg class='ic ' width='16' height='16'><use href='#ic-layout' width='16' height='16'/></svg>Show in diagram</a></div>
@@ -1186,7 +1234,7 @@ Referred by stock_movement ( product_id -&gt; id ) </title><rect class='iconPlat
 <div class='thead'><svg class='ic accent' width='20' height='20'><use href='#ic-table' width='20' height='20'/></svg><h3>product</h3><span class='badge'>Entity</span><span class='path'>Sendal Business Management System&#46;product</span><div class='actions'>
 <a class='chipbtn' href='#layout1' onclick="return showInDiagram('layout1','l1&#45;depict&#95;Sendal Business Management System&#46;product')"><svg class='ic ' width='16' height='16'><use href='#ic-layout' width='16' height='16'/></svg>Show in diagram</a></div>
 </div>
-<div class='facts'><span><b>7</b> attributes</span><span><b>1</b> primary key</span><span><b>2</b> indexes</span><span>referenced by <b>4</b></span></div>
+<div class='facts'><span><b>7</b> attributes</span><span><b>1</b> primary key</span><span><b>3</b> indexes</span><span>referenced by <b>5</b></span></div>
 <div class='tablewrap'><table class='cols'>
 <thead><tr><th class='flags'></th><th class='cname'>Attribute</th><th class='type'>Data Type</th><th class='attrs'>Constraints</th></tr></thead>
 <tbody>
@@ -1215,7 +1263,7 @@ Referred by stock_movement ( product_id -&gt; id ) </title><rect class='iconPlat
 		<td class='attrs'><span class='tag required'>NOT NULL</span></td>
 	</tr>
 	<tr>
-		<td class='flags'><svg class='ic nn' width='11' height='11'><title>Mandatory</title><use href='#nn' width='11' height='11'/></svg></td>
+		<td class='flags'><svg class='ic nn' width='11' height='11'><title>Mandatory</title><use href='#nn' width='11' height='11'/></svg><svg class='ic unq' width='15' height='15'><title>Unique</title><use href='#unq' width='15' height='15'/></svg><span class='plate'><svg class='ic ref' width='15' height='15'><title>Referenced by another table</title><use href='#ref' width='15' height='15'/></svg></span></td>
 		<td class='cname' id='Sendal+Business+Management+System.product.category'>category</td>
 		<td class='type'>VARCHAR&#40;100&#41;</td>
 		<td class='attrs'><span class='tag required'>NOT NULL</span></td>
@@ -1238,6 +1286,7 @@ Referred by stock_movement ( product_id -&gt; id ) </title><rect class='iconPlat
 <table class='sub'>
 <tr><td class='k'><svg class='ic pk' width='15' height='15'><use href='#pk' width='15' height='15'/></svg></td><td class='n'>pk&#95;product</td><td class='d'>Primary Key ON (id)</td></tr>
 <tr><td class='k'><svg class='ic unq' width='15' height='15'><use href='#unq' width='15' height='15'/></svg></td><td class='n'>unq&#95;product</td><td class='d'>Unique Key ON (code)</td></tr>
+<tr><td class='k'><svg class='ic unq' width='15' height='15'><use href='#unq' width='15' height='15'/></svg></td><td class='n'>unq&#95;product&#95;category</td><td class='d'>Unique Key ON (category)</td></tr>
 </table>
 <h4><span class='plate'><svg class='ic ref' width='15' height='15'><use href='#ref' width='15' height='15'/></svg></span> Referenced by</h4>
 <table class='sub'>
@@ -1245,6 +1294,7 @@ Referred by stock_movement ( product_id -&gt; id ) </title><rect class='iconPlat
 <tr><td class='k'><span class='plate'><svg class='ic ref' width='15' height='15'><use href='#ref' width='15' height='15'/></svg></span></td><td class='n'>fk&#95;buying&#95;price&#95;history&#95;product&#95;0</td><td class='d rel'>id <span class='arrow'>&#8592;</span> <a href='#Sendal+Business+Management+System.selling_price_history'>selling&#95;price&#95;history</a>.product&#95;id</td></tr>
 <tr><td class='k'><span class='plate'><svg class='ic ref' width='15' height='15'><use href='#ref' width='15' height='15'/></svg></span></td><td class='n'>fk&#95;sold&#95;item&#95;product</td><td class='d rel'>id <span class='arrow'>&#8592;</span> <a href='#Sendal+Business+Management+System.sold_item'>sold&#95;item</a>.product&#95;id</td></tr>
 <tr><td class='k'><span class='plate'><svg class='ic ref' width='15' height='15'><use href='#ref' width='15' height='15'/></svg></span></td><td class='n'>fk&#95;stock&#95;movement&#95;product</td><td class='d rel'>id <span class='arrow'>&#8592;</span> <a href='#Sendal+Business+Management+System.stock_movement'>stock&#95;movement</a>.product&#95;id</td></tr>
+<tr><td class='k'><span class='plate'><svg class='ic ref' width='15' height='15'><use href='#ref' width='15' height='15'/></svg></span></td><td class='n'>fk&#95;category&#95;product</td><td class='d rel'>category <span class='arrow'>&#8592;</span> <a href='#Sendal+Business+Management+System.category'>category</a>.name</td></tr>
 </table>
 </div>
 <div class='pad-b'></div>
