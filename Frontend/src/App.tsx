@@ -1,30 +1,30 @@
+import React, { Component } from 'react'
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Aside from "./components/Aside/Aside";
+import Home from "./pages/Home";
+import POS from './pages/POS';
+import Inventory from './pages/Inventory';
+import Bills from './pages/Bills';
+import Customers from './pages/Customers';
+import Maintenance from './pages/Maintenance';
 
-function App() {
+export class App extends Component {
+  render() {
   return (
     <>
-      <aside>
-        <nav>
-          <ul>
-            <li>
-              <div className="">
-              فاتورة جديدة
-              </div>
-              
-              </li>
-            <li>الفواتير</li>
-            <li>المخزن</li>
-            <li>العملاء</li>
-            <li>العملاء</li>
-          </ul>
-        </nav>
-
-        <div id="user-profile">
-
-        </div>
-      </aside>
+      <Aside/>
+      <Routes>
+        <Route path="/Home" element={<Home />}/>
+        <Route path="/POS" element={<POS />}/>
+        <Route path="/Inventory" element={<Inventory />}/>
+        <Route path="/Bills" element={<Bills />}/>
+        <Route path="/Customers" element={<Customers />}/>
+        <Route path="/Maintenance" element={<Maintenance />}/>
+      </Routes>
     </>
   );
+}
 }
 
 export default App;
