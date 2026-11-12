@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+nav li{
+    @apply mx-1 my-3 px-6 py-3 box-border rounded-xl hover:bg-[#203254]  hover:border-[#728dd1] hover:border-1 hover:cursor-pointer
+}

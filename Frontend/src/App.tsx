@@ -12,7 +12,7 @@ import Maintenance from './pages/Maintenance';
 export class App extends Component {
   render() {
   return (
-    <>
+    <div className='col-span-4'>
       <Aside/>
       <Routes>
         <Route path="/Home" element={<Home />}/>
@@ -22,7 +22,7 @@ export class App extends Component {
         <Route path="/Customers" element={<Customers />}/>
         <Route path="/Maintenance" element={<Maintenance />}/>
       </Routes>
-    </>
+    </div>
   );
 }
 }

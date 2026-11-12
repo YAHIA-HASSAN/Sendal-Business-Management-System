@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+
+@utility box-card{
+  @apply flex p-3 border-gray-700 border-y-1
+}
+
+@utility button{
+  @apply w-50 bg-[#155DFC] p-3 rounded-xl text-center
+}
+
