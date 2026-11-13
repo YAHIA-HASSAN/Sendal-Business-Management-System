@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 export class Bills extends Component {
   render() {
     return (
-      <div id='bills'>
-        
+      <div id='bills' className='page'>
+        BILLS
       </div>
     )
   }

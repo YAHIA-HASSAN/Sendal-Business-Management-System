@@ -9,3 +9,6 @@
   @apply w-50 bg-[#155DFC] p-3 rounded-xl text-center
 }
 
+@utility page{
+  @apply m-4;
+}

@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
-nav li{
-    @apply mx-1 my-3 px-6 py-3 box-border rounded-xl hover:bg-[#203254]  hover:border-[#728dd1] hover:border-1 hover:cursor-pointer
+nav li {
+    @apply relative w-full mx-1 my-4 px-7 py-3 cursor-pointer;
+}
+
+
+nav li::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 h-[1px] w-0 bg-[#155DFC] transition-all duration-500;
+    transform: translateX(-50%);
+}
+
+nav li:hover::after {
+    @apply w-full;
 }
