@@ -2,13 +2,13 @@
 
 
 @utility box-card{
-  @apply flex p-3 border-gray-700 border-y-1
+  @apply flex p-3 border-gray-700 border-y-[1px];
 }
 
 @utility button{
-  @apply w-50 bg-[#155DFC] p-3 rounded-xl text-center
+  @apply w-50 bg-[#FA8813] p-3 rounded-xl text-center hover:bg-[#f3a65a];
 }
 
 @utility page{
-  @apply m-4;
+  @apply p-4 w-full bg-[#F8FAFC];
 }

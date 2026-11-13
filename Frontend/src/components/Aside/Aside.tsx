@@ -15,7 +15,7 @@ export class aside extends Component {
               alt="Sendal Logo"
               className="w-20 rounded-full m-1"
             />
-            <p className="pr-3 pt-4">سندال . . قدها وقدود</p>
+            <p className="pr-3 pt-4 text-center">سندال . . قدها وقدود</p>
           </div>
 
           <Navbar />

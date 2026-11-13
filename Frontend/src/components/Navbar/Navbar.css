@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 nav li {
-    @apply relative w-full mx-1 my-4 px-7 py-3 cursor-pointer;
+    @apply relative w-full my-4 px-7 py-3 cursor-pointer;
 }
 
 
 nav li::after {
     content: '';
-    @apply absolute bottom-0 left-1/2 h-[1px] w-0 bg-[#155DFC] transition-all duration-500;
+    @apply absolute bottom-0 left-1/2 h-[1px] w-0 bg-[#FA8813] transition-all duration-500;
     transform: translateX(-50%);
 }
 
