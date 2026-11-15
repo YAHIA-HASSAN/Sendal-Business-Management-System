@@ -7,7 +7,7 @@ import sendalLogo from "../../assets/sendal-logo.png";
 export class aside extends Component {
   render() {
     return (
-      <aside className="flex flex-col justify-between h-dvh bg-[#0F172B] max-w-xs p-x-3 text-blue-50">
+      <aside className="flex flex-col justify-between min-h-fit h-dvh bg-[#0F172B] max-w-xs p-x-3 text-blue-50">
         <div>
           <div id="logo" className="nav-user-card">
             <img

@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+table{
+    @apply  relative p-2  
+          bg-white 
+            shadow-2xl
+            rounded-xl
+            table-fixed 
+            w-full
+            text-center
+            overflow-clip
+}
+
+thead{
+    @apply bg-amber-500
+            rounded-t-xl
+            text-white
+            h-10
+}
+th{
+    @apply border-r-2
+}
+
+tr{
+    @apply border-b border-amber-500 
+}
+td{
+    @apply p-2
+}
