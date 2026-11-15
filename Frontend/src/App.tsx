@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Aside from "./components/Aside/Aside";
@@ -15,6 +15,7 @@ export class App extends Component {
     <div className='flex'>
       <Aside/>
       <Routes>
+        <Route path="/" element={<Home />}/>
         <Route path="/Home" element={<Home />}/>
         <Route path="/POS" element={<POS />}/>
         <Route path="/Inventory" element={<Inventory />}/>
