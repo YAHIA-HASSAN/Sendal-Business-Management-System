@@ -1,0 +1,18 @@
+@reference "../../index.css";
+
+@layer components {
+  .login-form { @apply grid gap-5; }
+  .login-field { @apply grid gap-2 text-sm font-semibold text-[#344157]; }
+  .login-input-wrap { @apply flex h-[50px] items-center gap-3 rounded-xl border border-[#e7ebf1] bg-[#fafbfd] px-3.5 transition; }
+  .login-input-wrap:focus-within { @apply border-sendal-orange-500 bg-white ring-4 ring-sendal-orange-500/10; }
+  .login-input-icon { @apply grid h-8 w-8 flex-none place-items-center rounded-lg bg-[#fff3e5] text-lg text-sendal-orange-500; }
+  .login-input-wrap input { @apply h-full min-w-0 flex-1 border-0 bg-transparent text-sm font-normal text-[#263449] outline-none placeholder:text-[#a5adba]; }
+  .password-visibility-button { @apply flex-none cursor-pointer border-0 bg-transparent text-xs font-semibold text-[#8b95a4] hover:text-sendal-orange-600; }
+  .login-options { @apply flex items-center justify-between gap-3 text-xs; }
+  .remember-me { @apply flex cursor-pointer items-center gap-2 text-[#697589]; }
+  .remember-me input { @apply h-4 w-4 accent-sendal-orange-500; }
+  .forgot-password { @apply cursor-pointer border-0 bg-transparent p-0 font-semibold text-sendal-orange-600 hover:underline; }
+  .login-submit { @apply flex h-[50px] cursor-pointer items-center justify-center gap-2 rounded-xl border-0 bg-sendal-orange-500 text-sm font-bold text-white shadow-lg shadow-sendal-orange-500/20 transition hover:-translate-y-0.5 hover:bg-sendal-orange-600; }
+  .login-submit span { @apply text-lg; }
+  .login-error { @apply m-0 rounded-lg bg-[#fff0ef] px-3 py-2 text-xs text-[#aa3730]; }
+}

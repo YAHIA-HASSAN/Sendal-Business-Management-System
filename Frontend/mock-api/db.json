@@ -1,0 +1,41 @@
+{
+  "users": [
+    { "id": "user-demo", "name": "نوح", "username": "noah", "password": "demo123", "role": "seller" },
+    { "id": "admin-demo", "name": "مدير تجريبي", "username": "admin", "password": "demo123", "role": "admin" }
+  ],
+  "customers": [
+    { "id": "customer-001", "name": "أحمد محمد", "phoneNumber": "01012345678" },
+    { "id": "customer-002", "name": "محمود علي", "phoneNumber": "01123456789" },
+    { "id": "customer-003", "name": "سارة حسن", "phoneNumber": "01234567890" }
+  ],
+  "categories": [
+    { "id": "category-accessories", "name": "إكسسوارات" },
+    { "id": "category-parts", "name": "قطع غيار" },
+    { "id": "category-audio", "name": "صوتيات" }
+  ],
+  "products": [
+    { "id": "product-001", "name": "شاشة ايفون 13", "code": "SCR-IP13", "categoryId": "category-parts", "stock": 8, "active": true, "unitPrice": 1250 },
+    { "id": "product-002", "name": "شاحن سريع Type-C", "code": "CHR-TC20", "categoryId": "category-accessories", "stock": 15, "active": true, "unitPrice": 320 },
+    { "id": "product-003", "name": "سماعة بلوتوث", "code": "AUD-BT01", "categoryId": "category-audio", "stock": 9, "active": true, "unitPrice": 475 },
+    { "id": "product-004", "name": "جراب ايفون 13", "code": "CAS-IP13", "categoryId": "category-accessories", "stock": 22, "active": true, "unitPrice": 180 },
+    { "id": "product-005", "name": "كابل شحن Type-C", "code": "CBL-TC01", "categoryId": "category-accessories", "stock": 30, "active": true, "unitPrice": 95 },
+    { "id": "product-006", "name": "بطارية سامسونج A52", "code": "BAT-SA52", "categoryId": "category-parts", "stock": 4, "active": true, "unitPrice": 690 },
+    { "id": "product-007", "name": "لاصقة حماية شاشة", "code": "GLS-UNI1", "categoryId": "category-accessories", "stock": 40, "active": true, "unitPrice": 75 },
+    { "id": "product-008", "name": "سماعة سلكية", "code": "AUD-WR01", "categoryId": "category-audio", "stock": 0, "active": true, "unitPrice": 140 }
+  ],
+  "sellingPriceHistory": [
+    { "id": "price-001", "productId": "product-001", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 1250 },
+    { "id": "price-002", "productId": "product-002", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 320 },
+    { "id": "price-003", "productId": "product-003", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 475 },
+    { "id": "price-004", "productId": "product-004", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 180 },
+    { "id": "price-005", "productId": "product-005", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 95 },
+    { "id": "price-006", "productId": "product-006", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 690 },
+    { "id": "price-007", "productId": "product-007", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 75 },
+    { "id": "price-008", "productId": "product-008", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 140 }
+  ],
+  "bills": [],
+  "soldItems": [],
+  "paymentHistory": [],
+  "cashMovements": [],
+  "cashDrawers": [ { "id": "drawer-main", "balance": 0, "lastUpdate": null } ]
+}
