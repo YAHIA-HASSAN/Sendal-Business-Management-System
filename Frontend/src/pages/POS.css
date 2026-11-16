@@ -1,0 +1,116 @@
+@reference "../index.css";
+@layer components {
+  .pos-page {
+    @apply box-border flex h-dvh max-h-dvh min-h-0 min-w-0 w-full flex-1 flex-col overflow-hidden font-sans text-sendal-ink;
+  }
+
+  .pos-heading {
+    @apply mx-auto mb-4 flex w-full max-w-[1440px] flex-none items-center justify-between gap-4;
+  }
+
+  .pos-heading h1 {
+    @apply mb-[5px] mt-0.5 text-[27px] font-bold;
+  }
+
+  .pos-heading p {
+    @apply m-0 text-[13px] text-[#8490a2];
+  }
+
+  .pos-eyebrow {
+    @apply text-xs font-bold text-[#ed8214];
+  }
+
+  .pos-back-button {
+    @apply cursor-pointer rounded-[10px] border border-[#e4e8ef] bg-white px-[15px] py-[10px] text-[#5d687a];
+  }
+
+  .pos-columns {
+    @apply mx-auto grid min-h-0 w-full max-w-[1440px] flex-1 grid-cols-[minmax(0,1.08fr)_minmax(350px,0.92fr)] gap-5;
+  }
+
+  .pos-panel {
+    @apply flex h-full min-h-0 min-w-0 flex-col overflow-hidden rounded-[17px] border border-[#edf0f4] bg-white p-[22px] shadow-[0_8px_25px_rgba(21,34,55,0.05)];
+  }
+
+  .panel-heading {
+    @apply mb-[18px] flex flex-none items-center justify-between gap-4;
+  }
+
+  .panel-heading h2 {
+    @apply mb-[5px] mt-0 text-lg font-bold;
+  }
+
+  .panel-heading p {
+    @apply m-0 text-[13px] text-[#8490a2];
+  }
+
+  .panel-count {
+    @apply whitespace-nowrap rounded-full bg-[#fff3e5] px-[10px] py-1.5 text-xs text-[#e47b0c];
+  }
+}
+
+@media (max-width: 960px) {
+  .pos-columns {
+    @apply grid-cols-2 gap-3;
+  }
+
+  .pos-panel {
+    @apply p-4;
+  }
+}
+
+@media (max-height: 720px) {
+  .pos-heading {
+    @apply mb-[10px];
+  }
+
+  .pos-heading h1 {
+    @apply text-[22px];
+  }
+
+  .pos-panel {
+    @apply p-3.5;
+  }
+
+  .panel-heading {
+    @apply mb-[10px];
+  }
+}
+
+@media (max-width: 600px) {
+  .pos-page {
+    @apply p-2.5;
+  }
+
+  .pos-heading {
+    @apply mb-4 items-start;
+  }
+
+  .pos-heading h1 {
+    @apply text-[22px];
+  }
+
+  .pos-back-button {
+    @apply px-[10px] py-2 text-[11px];
+  }
+
+  .pos-panel {
+    @apply p-2.5;
+  }
+
+  .pos-columns {
+    @apply grid-cols-2 gap-2;
+  }
+
+  .panel-heading {
+    @apply items-start gap-1.5;
+  }
+
+  .panel-heading h2 {
+    @apply text-[15px];
+  }
+
+  .panel-heading p {
+    @apply text-[11px];
+  }
+}

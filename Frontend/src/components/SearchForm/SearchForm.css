@@ -1,16 +1,23 @@
-@import "tailwindcss";
-
-
-#search-bar>input{
-    @apply  shadow 
-            p-3 
-            rounded-xl 
-            bg-white 
-            w-full
-            focus-visible:border-2
-            focus-visible:border-[#FA8813]
-            focus-visible:outline-0
-            focus:border-2
-            focus:border-[#FA8813]
+@reference "../../index.css";
+@layer components {
+  .product-search { @apply mb-3 flex h-11 flex-none items-center gap-2 rounded-[10px] border border-[#e8ebf0] bg-[#fafbfd] px-3 text-[#929cab]; }
+  .product-search:focus-within { @apply border-sendal-orange-500 ring-2 ring-sendal-orange-500/10; }
+  .product-search > span { @apply text-[21px]; }
+  .product-search input { @apply w-full border-0 bg-transparent text-xs text-[#334158] outline-none; }
+  .product-search button { @apply border-0 bg-transparent text-xl text-[#929cab] cursor-pointer; }
+  .product-results { @apply flex min-h-0 flex-1 flex-col gap-2 overflow-auto px-0.5 py-1; }
+  .product-card { @apply flex flex-none items-center gap-3 rounded-[10px] border border-[#edf0f4] p-3; }
+  .product-card-info { @apply min-w-0 flex-1; }
+  .product-card-info h3 { @apply m-0 overflow-hidden text-ellipsis whitespace-nowrap text-[13px] font-semibold text-[#344157]; }
+  .product-card-info span { @apply mt-1 block text-[11px] text-[#929cab]; }
+  .product-meta { @apply grid flex-none justify-items-end gap-1; }
+  .product-meta strong { @apply text-xs text-[#e17a12]; }
+  .product-meta span { @apply text-[10px] text-[#929cab]; }
+  .add-product-button { @apply flex-none rounded-lg border-0 bg-[#fff3e5] px-2.5 py-2 text-[11px] font-semibold text-[#df7710] cursor-pointer; }
+  .add-product-button:hover:not(:disabled) { @apply bg-[#ffe8ca]; }
+  .add-product-button:disabled { @apply cursor-default bg-[#f2f3f5] text-[#adb4bf]; }
+  .empty-products { @apply grid flex-1 content-center justify-items-center px-4 py-8 text-center text-[#8590a0]; }
+  .empty-products > span { @apply mb-2 text-3xl text-[#e88722]; }
+  .empty-products strong { @apply text-sm text-[#536074]; }
+  .empty-products p { @apply mt-2 text-xs; }
 }
-

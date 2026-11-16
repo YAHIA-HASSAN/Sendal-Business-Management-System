@@ -12,7 +12,7 @@ import Maintenance from './pages/Maintenance';
 export class App extends Component {
   render() {
   return (
-    <div className='flex'>
+    <div className='app-shell'>
       <Aside/>
       <Routes>
         <Route path="/" element={<Home />}/>

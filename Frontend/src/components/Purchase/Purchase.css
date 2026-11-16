@@ -1,34 +1,48 @@
-@import "tailwindcss";
-
-#purchase{
-    @apply min-w-65 max-w-150 
-           w-1/2 p-3 
-           bg-white 
-           shadow-xl 
-           rounded-xl
-           flex
-           flex-col
-           justify-between;
+@reference "../../index.css";
+@layer components {
+.invoice-panel-heading { @apply border-b border-[#eef0f4] pb-4; }
+.clear-cart-button { @apply cursor-pointer border-0 bg-transparent p-1.5 text-xs text-[#dc6a60]; }
+.invoice-lines { @apply flex min-h-0 flex-1 flex-col gap-2.5 overflow-auto px-0.5 pb-1 pt-[15px]; }
+.invoice-line { @apply flex-none border-b border-[#f0f2f5] px-0.5 pb-3.5 pt-[11px]; }
+.invoice-line-main,.invoice-line-bottom { @apply flex items-center justify-between gap-4; }
+.invoice-line-main { @apply items-start; }
+.invoice-product-name { @apply grid gap-1; }
+.invoice-product-name strong { @apply text-[13px]; }
+.invoice-product-name span { @apply text-[11px] text-[#929cab]; }
+.remove-line-button { @apply h-[30px] w-[30px] cursor-pointer rounded-lg border-0 bg-[#f7f8fa] text-xl leading-none text-[#9aa4b2]; }
+.remove-line-button:hover { @apply bg-[#fff0ef] text-[#dc6a60]; }
+.invoice-line-bottom { @apply mt-3; }
+.quantity-control { @apply inline-flex h-8 items-center rounded-lg border border-[#e8ebf0]; }
+.quantity-control button { @apply h-[30px] w-8 cursor-pointer border-0 bg-transparent text-[17px] text-[#657184]; }
+.quantity-control button:disabled { @apply cursor-default text-[#c8ced7]; }
+.quantity-control span { @apply min-w-[30px] text-center text-xs font-bold; }
+.line-total { @apply text-[13px] text-[#273449]; }
+.stock-limit-note { @apply mt-1 block text-[10px] text-[#b77429]; }
+.invoice-details-fields { @apply grid flex-none grid-cols-2 gap-2.5 border-t border-[#eef0f4] py-3.5; }
+.invoice-notes-field { @apply col-span-full; }
+.empty-invoice { @apply grid min-h-0 flex-1 content-center justify-items-center px-[15px] py-9 text-center text-[#8590a0]; }
+.empty-invoice > span { @apply mb-3 grid h-11 w-11 place-items-center rounded-[14px] bg-[#fff3e5] text-[25px] text-[#e88722]; }
+.empty-invoice strong { @apply text-sm text-[#536074]; }
+.empty-invoice p { @apply mt-2 text-xs; }
+.invoice-summary { @apply mt-auto flex-none border-t border-[#eef0f4] pt-[15px]; }
+.invoice-summary > div { @apply mb-3 flex justify-between text-xs text-[#7c8798]; }
+.invoice-summary > div strong { @apply text-[#303d50]; }
+.invoice-summary .discount-row { @apply items-center gap-3; }
+.discount-row > label { @apply flex-none text-[#7c8798]; }
+.discount-control { @apply flex flex-wrap items-center justify-start gap-2; }
+.discount-control input { @apply h-[34px] w-[100px] rounded-lg border border-[#e5e9ef] px-2 text-xs text-[#334158]; }
+.discount-control input:focus { @apply border-sendal-orange-500 outline-2 outline-sendal-orange-500/10; }
+.discount-control > span:not(.discount-approved) { @apply text-[11px] text-[#8a95a4]; }
+.discount-control button { @apply cursor-pointer rounded-[7px] border-0 bg-[#fff4e7] px-[9px] py-[7px] text-[10px] font-semibold text-[#d9770d]; }
+.discount-control button:disabled { @apply cursor-default bg-[#f2f3f5] text-[#adb4bf]; }
+.discount-approved { @apply text-[11px] font-bold text-[#348251]; }
+.discount-pending-note { @apply -mt-1 mb-2.5 text-[10px] text-[#a8752f]; }
+.invoice-summary .invoice-total-row { @apply my-[15px] items-center text-sm font-bold text-[#303d50]; }
+.invoice-total-row strong { @apply text-[19px] text-[#e17a12]; }
 }
-
-#purchase h2{
-    @apply  text-center p-2 
-            mb-2 
-            border-b-[1px] 
-            border-gray-300;
-}
-#purchase-items{
-    @apply  flex
-            flex-col
-            
-}
-
-.purchase-item{
-    @apply  shadow-md
-            bg-[#faf9f9]
-            p-2 m-1
-            rounded-md
-            flex 
-            justify-between
-
+@media (max-width: 600px) {
+  .invoice-details-fields { @apply grid-cols-1; }
+  .invoice-notes-field { grid-column: auto; }
+  .discount-row { @apply items-start flex-col; }
+  .discount-control { @apply justify-start; }
 }

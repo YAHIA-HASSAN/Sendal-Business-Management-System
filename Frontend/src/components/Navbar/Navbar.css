@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@reference "../../index.css";
 
 nav li {
     @apply  relative

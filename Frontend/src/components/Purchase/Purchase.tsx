@@ -1,40 +1,74 @@
-import { Component } from "react";
+import type { Customer, InvoiceLine, Product } from "../../data/invoiceStore";
+import InvoiceDetails from "../POS/InvoiceDetails";
+import InvoiceLineList from "../POS/InvoiceLineList";
+import InvoiceSummary from "../POS/InvoiceSummary";
+import "../POS/shared.css";
 import "./Purchase.css";
-import { NavLink } from "react-router-dom";
 
-export class Purchase extends Component {
-  render() {
-    return (
-      <div id="purchase">
+type Props = {
+  items: InvoiceLine[];
+  products: Product[];
+  customers: Customer[];
+  customerId: string;
+  warranty: string;
+  notes: string;
+  subtotal: number;
+  total: number;
+  discountAmount: number;
+  isDiscountApproved: boolean;
+  invalidDiscount: boolean;
+  error: string;
+  onCustomerChange: (customerId: string) => void;
+  onWarrantyChange: (value: string) => void;
+  onNotesChange: (value: string) => void;
+  onDiscountChange: (amount: number) => void;
+  onRequestDiscountApproval: () => void;
+  onQuantityChange: (productId: string, delta: number) => void;
+  onRemoveLine: (productId: string) => void;
+  onClearInvoice: () => void;
+  onContinueToPayment: () => void;
+};
+
+export default function Purchase({
+  items, products, customers, customerId, warranty, notes, subtotal, total, discountAmount,
+  isDiscountApproved, invalidDiscount, error, onCustomerChange, onWarrantyChange, onNotesChange,
+  onDiscountChange, onRequestDiscountApproval, onQuantityChange, onRemoveLine, onClearInvoice,
+  onContinueToPayment,
+}: Props) {
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  return (
+    <section className="pos-panel invoice-panel" aria-labelledby="invoice-title">
+      <div className="panel-heading invoice-panel-heading">
         <div>
-          <h2>الفاتورة</h2>
-        <div id="purchase-items">
-          <div className="purchase-item">
-           <div className="quantity">
-            <input type="button" value="+" />
-            <p>1</p>
-            <input type="button" value="-" />
-           </div>
-           <div className="name"> شاشة ايفون 13</div>
-           <div className="price"> 300</div>
-          </div>
-            <div className="purchase-item">
-           <div className="quantity">
-            <input type="button" value="+" />
-            <p>1</p>
-            <input type="button" value="-" />
-           </div>
-           <div className="name"> شاشة ايفون 13</div>
-           <div className="price"> 300</div>
-          </div>
+          <h2 id="invoice-title">محتويات الفاتورة</h2>
+          <p>{items.length ? `${items.length} صنف` : "أضف منتجات للبدء"}</p>
         </div>
-        </div>
-        <NavLink id="purchase-pay" to="" className="button bottom-0 w-full">
-          تأكيد الفاتورة
-        </NavLink>
+        {items.length > 0 && <button className="clear-cart-button" type="button" onClick={onClearInvoice}>إفراغ الفاتورة</button>}
       </div>
-    );
-  }
-}
 
-export default Purchase;
+      <InvoiceLineList items={items} products={products} onQuantityChange={onQuantityChange} onRemove={onRemoveLine} />
+      <InvoiceDetails
+        customers={customers}
+        customerId={customerId}
+        warranty={warranty}
+        notes={notes}
+        onCustomerChange={onCustomerChange}
+        onWarrantyChange={onWarrantyChange}
+        onNotesChange={onNotesChange}
+      />
+      <InvoiceSummary
+        itemCount={itemCount}
+        subtotal={subtotal}
+        total={total}
+        discountAmount={discountAmount}
+        isDiscountApproved={isDiscountApproved}
+        invalidDiscount={invalidDiscount}
+        error={error}
+        onDiscountChange={onDiscountChange}
+        onRequestDiscountApproval={onRequestDiscountApproval}
+        onContinueToPayment={onContinueToPayment}
+      />
+    </section>
+  );
+}

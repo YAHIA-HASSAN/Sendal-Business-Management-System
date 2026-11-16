@@ -1,0 +1,148 @@
+@reference "../index.css";
+@layer components {
+.bills-page {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  color: #182235;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+.bills-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: 1440px;
+  flex: none;
+  margin: 0 auto 16px;
+}
+.bills-heading h1 {
+  margin: 2px 0 5px;
+  font-size: 27px;
+  font-weight: 750;
+}
+.bills-heading p {
+  margin: 0;
+  color: #8490a2;
+  font-size: 13px;
+}
+.bills-heading .bills-eyebrow {
+  color: #ed8214;
+  font-size: 12px;
+  font-weight: 700;
+}
+.bills-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cash-drawer-summary {
+  display: grid;
+  gap: 4px;
+  border: 1px solid #e8ebf0;
+  border-radius: 10px;
+  padding: 8px 13px;
+  background: #fff;
+}
+.cash-drawer-summary span {
+  color: #8893a2;
+  font-size: 10px;
+}
+.cash-drawer-summary strong {
+  color: #354258;
+  font-size: 13px;
+}
+.new-invoice-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 17px;
+  color: #fff;
+  background: #fa8813;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 5px 12px rgb(250 136 19 / 18%);
+}
+.new-invoice-button:hover {
+  background: #e87a0d;
+}
+.new-invoice-button span {
+  font-size: 20px;
+  line-height: 1;
+}
+.invoice-issued-notice {
+  display: flex;
+  max-width: 1440px;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  margin: 0 auto 12px;
+  border: 1px solid #d5ebdd;
+  border-radius: 11px;
+  padding: 12px 14px;
+  color: #32774d;
+  background: #f1faf4;
+}
+
+@media (max-height: 640px) {
+  .bills-heading { margin-bottom: 10px; }
+  .bills-heading h1 { font-size: 22px; }
+  .invoice-issued-notice { margin-bottom: 8px; padding: 8px 12px; }
+}
+.notice-check {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #48a86c;
+  font-weight: 700;
+}
+.invoice-issued-notice > div {
+  display: grid;
+  gap: 3px;
+  font-size: 12px;
+}
+.invoice-issued-notice > div span {
+  color: #658c72;
+  font-size: 11px;
+}
+.invoice-issued-notice > button {
+  margin-right: auto;
+  border: 0;
+  color: #6b9b79;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+@media (max-width: 600px) {
+  .bills-page {
+    padding: 14px;
+  }
+  .bills-heading {
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .bills-heading h1 {
+    font-size: 22px;
+  }
+  .bills-heading-actions {
+    align-items: flex-end;
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  .new-invoice-button {
+    padding: 8px 11px;
+    font-size: 11px;
+  }
+}
+}

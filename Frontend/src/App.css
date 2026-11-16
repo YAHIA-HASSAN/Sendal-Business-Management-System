@@ -1,38 +1,7 @@
-@import "tailwindcss";
+@reference "./index.css";
 
-
-@utility nav-user-card{
-  @apply  flex 
-          justify-between 
-          p-3 
-          border-gray-700 
-          border-y-[1px];
+@layer components {
+  .app-shell {
+    @apply flex h-dvh w-full min-w-0 overflow-hidden;
+  }
 }
-
-
-@utility button{
-  @apply  w-50
-          relative 
-        text-white 
-        bg-[#FA8813] 
-        p-3 
-        rounded-md 
-        text-center 
-        hover:bg-[#f3a65a];
-}
-
-@utility page{
-  @apply  p-4 
-          w-full
-          bg-[#F8FAFC];
-}
-
-@utility icon{
-  @apply  relative 
-          self-center 
-          w-6  
-          hover:grayscale-75 
-          transition-all 
-          duration-400;
-}
-

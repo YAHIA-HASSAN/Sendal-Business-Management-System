@@ -1,29 +1,54 @@
-@import "tailwindcss";
+@reference "../../index.css";
+@layer components {
+.bills-list-card { @apply flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-[#edf0f4] bg-white; box-shadow: 0 8px 25px rgb(21 34 55 / 5%); }
+.bills-list-toolbar { display: flex; flex: none; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 22px; }
+.bills-list-toolbar h2 { margin: 0 0 5px; color: #263449; font-size: 17px; }
+.bills-list-toolbar p { margin: 0; color: #8994a3; font-size: 12px; }
+.bills-search { display: flex; min-width: 230px; height: 40px; align-items: center; gap: 8px; border: 1px solid #e8ebf0; border-radius: 9px; padding: 0 11px; color: #929cab; background: #fafbfd; }
+.bills-search > span { font-size: 21px; }
+.bills-search input { width: 100%; border: 0; outline: 0; color: #334158; background: transparent; font: inherit; font-size: 12px; }
+.bills-search:focus-within { border-color: #fa8813; box-shadow: 0 0 0 3px rgb(250 136 19 / 10%); }
+.bills-table-wrap { min-height: 0; flex: 1; overflow: hidden; }
+.bills-table { width: 100%; table-layout: fixed; border-collapse: collapse; text-align: right; font-size: 12px; }
+.bills-table thead { height: auto; color: #fff; background: #f39a35; }
+.bills-table th { border: 0; padding: 10px 12px; font-weight: 650; white-space: nowrap; }
+.bills-table td { border-bottom: 1px solid #f0f2f5; padding: 10px 12px; color: #667286; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bills-table tbody tr:last-child td { border-bottom: 0; }
+.bills-table tbody tr:hover { background: #fffdfa; }
+.bills-table .bill-number { color: #344157; font-weight: 700; }
+.bills-table .bill-amount { color: #344157; font-weight: 700; }
+.bill-status { display: inline-flex; border-radius: 20px; padding: 5px 9px; font-size: 10px; font-weight: 650; }
+.bill-status-paid { color: #338154; background: #eaf7ef; }
+.bill-status-partial { color: #a36d16; background: #fff5df; }
+.bill-status-unpaid { color: #b6534e; background: #fff0ef; }
+.bills-table .bill-remaining { color: #bc6259; font-weight: 650; }
+.bills-table .bill-zero { color: #97a1af; }
+.bills-table .bills-empty-row { height: 72px; color: #8e98a6; text-align: center; }
+.bills-list-footer { display: flex; flex: none; align-items: center; justify-content: flex-start; gap: 8px; border-top: 1px solid #f0f2f5; padding: 10px 16px; color: #8a95a4; font-size: 11px; }
+.bills-list-footer strong { color: #38465b; }
+.bills-pagination { display: flex; align-items: center; gap: 8px; margin-inline-start: auto; }
+.bills-pagination button { border: 1px solid #e8ebf0; border-radius: 7px; padding: 5px 9px; color: #59667a; background: #fff; cursor: pointer; font: inherit; font-size: 10px; }
+.bills-pagination button:disabled { color: #adb5c0; background: #f7f8fa; cursor: default; }
+.bills-pagination span { min-width: 72px; text-align: center; }
 
-table{
-    @apply  relative p-2  
-          bg-white 
-            shadow-2xl
-            rounded-xl
-            table-fixed 
-            w-full
-            text-center
-            overflow-clip
+@media (max-width: 620px) {
+  .bills-list-toolbar { align-items: stretch; flex-direction: column; padding: 12px; }
+  .bills-search { min-width: 0; }
+  .bills-table { font-size: 10px; }
+  .bills-table th,.bills-table td { padding: 8px 5px; }
+  .bills-list-footer { padding: 8px; gap: 5px; font-size: 10px; }
+  .bills-pagination { gap: 4px; }
+  .bills-pagination button { padding: 5px; }
+  .bills-pagination span { min-width: 58px; }
 }
 
-thead{
-    @apply bg-amber-500
-            rounded-t-xl
-            text-white
-            h-10
-}
-th{
-    @apply border-r-2
+@media (max-width: 1100px) {
+  .bills-table th:nth-child(3),.bills-table td:nth-child(3),
+  .bills-table th:nth-child(5),.bills-table td:nth-child(5) { display: none; }
 }
 
-tr{
-    @apply border-b border-amber-500 
+@media (max-width: 700px) {
+  .bills-table th:nth-child(2),.bills-table td:nth-child(2) { display: none; }
+  .bills-table th,.bills-table td { padding-inline: 4px; }
 }
-td{
-    @apply p-2
 }
