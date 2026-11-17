@@ -1,0 +1,9 @@
+@reference "../index.css";
+
+@layer components { .users-table { table-layout: fixed; } }
+@media (max-width: 700px) {
+  .users-table th:nth-child(4), .users-table td:nth-child(4),
+  .users-table th:nth-child(5), .users-table td:nth-child(5),
+  .users-table th:nth-child(6), .users-table td:nth-child(6) { display: none; }
+  .users-table th, .users-table td { padding: 9px 6px; }
+}

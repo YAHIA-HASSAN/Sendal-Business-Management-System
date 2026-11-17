@@ -16,7 +16,8 @@ export default function Table({ invoices }: Props) {
     return invoices.filter((invoice) => !query || String(invoice.number).includes(query) || `#${String(invoice.number).padStart(5, "0")}`.includes(query));
   }, [invoices, search]);
   const pageCount = Math.max(1, Math.ceil(visibleInvoices.length / pageSize));
-  const pageInvoices = visibleInvoices.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  const activePage = Math.min(currentPage, pageCount);
+  const pageInvoices = visibleInvoices.slice((activePage - 1) * pageSize, activePage * pageSize);
 
   useEffect(() => {
     const updatePageSize = () => setPageSize(getPageSize());
@@ -24,8 +25,6 @@ export default function Table({ invoices }: Props) {
     return () => window.removeEventListener("resize", updatePageSize);
   }, []);
 
-  useEffect(() => setCurrentPage(1), [search]);
-  useEffect(() => setCurrentPage((page) => Math.min(page, pageCount)), [pageCount]);
 
   return (
     <section className="bills-list-card">
@@ -36,7 +35,7 @@ export default function Table({ invoices }: Props) {
         </div>
         <label className="bills-search">
           <span aria-hidden="true">⌕</span>
-          <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="ابحث برقم الفاتورة" />
+          <input value={search} onChange={(event) => { setSearch(event.target.value); setCurrentPage(1); }} placeholder="ابحث برقم الفاتورة" />
         </label>
       </div>
       <div className="bills-table-wrap">
@@ -64,9 +63,9 @@ export default function Table({ invoices }: Props) {
       <div className="bills-list-footer">
         <span>عدد الفواتير</span><strong>{visibleInvoices.length}</strong>
         <div className="bills-pagination" dir="rtl">
-          <button type="button" onClick={() => setCurrentPage((page) => Math.max(1, page - 1))} disabled={currentPage <= 1}>السابق</button>
-          <span>صفحة {currentPage} من {pageCount}</span>
-          <button type="button" onClick={() => setCurrentPage((page) => Math.min(pageCount, page + 1))} disabled={currentPage >= pageCount}>التالي</button>
+          <button type="button" onClick={() => setCurrentPage((page) => Math.max(1, page - 1))} disabled={activePage <= 1}>السابق</button>
+          <span>صفحة {activePage} من {pageCount}</span>
+          <button type="button" onClick={() => setCurrentPage((page) => Math.min(pageCount, page + 1))} disabled={activePage >= pageCount}>التالي</button>
         </div>
       </div>
     </section>

@@ -1,13 +1,56 @@
-import { Component } from 'react'
+import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { createCustomer, getBillDetails, getCustomers, getInvoices, recordBillPayment, updateCustomer } from "../api/client";
+import { useAuth } from "../auth/AuthContext";
+import type { Customer, InvoiceSummary } from "../data/invoiceStore";
+import "./Customers.css";
 
-export class Customers extends Component {
-  render() {
-    return (
-      <div id='customers' className='page'>
-        CUSOMER
-      </div>
-    )
+const money = new Intl.NumberFormat("ar-EG", { style: "currency", currency: "EGP", maximumFractionDigits: 2 });
+type BillDetails = Awaited<ReturnType<typeof getBillDetails>>;
+
+export default function Customers() {
+  const { user } = useAuth();
+  const [customers, setCustomers] = useState<Customer[]>([]); const [selectedId, setSelectedId] = useState(""); const [bills, setBills] = useState<InvoiceSummary[]>([]);
+  const [search, setSearch] = useState(""); const [customerPage, setCustomerPage] = useState(1); const [billPage, setBillPage] = useState(1); const [loading, setLoading] = useState(true); const [error, setError] = useState(""); const [editing, setEditing] = useState<Customer>();
+  const [details, setDetails] = useState<BillDetails>(); const [payingBill, setPayingBill] = useState<InvoiceSummary>();
+  useEffect(() => {
+    let active = true;
+    getCustomers().then((list) => { if (active) { setCustomers(list); if (list[0]) setSelectedId(list[0].id); } })
+      .catch((e: unknown) => { if (active) setError(e instanceof Error ? e.message : "تعذر تحميل العملاء."); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, []);
+  useEffect(() => {
+    if (!selectedId) return;
+    let active = true;
+    getInvoices(selectedId).then((result) => { if (active) setBills(result); })
+      .catch((e: unknown) => { if (active) setError(e instanceof Error ? e.message : "تعذر تحميل فواتير العميل."); });
+    return () => { active = false; };
+  }, [selectedId]);
+  const selected = customers.find((customer) => customer.id === selectedId);
+  const visible = useMemo(() => { const q = search.trim().toLocaleLowerCase("ar"); return customers.filter((customer) => `${customer.name} ${customer.phoneNumber}`.toLocaleLowerCase("ar").includes(q)); }, [customers, search]);
+  const customerPageCount = Math.max(1, Math.ceil(visible.length / 3)); const customerRows = visible.slice((customerPage - 1) * 3, customerPage * 3);
+  const billPageCount = Math.max(1, Math.ceil(bills.length / 4)); const billRows = bills.slice((billPage - 1) * 4, billPage * 4);
+  async function saveCustomer(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault(); const f = new FormData(event.currentTarget); const name = String(f.get("name")).trim(); const phoneNumber = String(f.get("phone")).trim();
+    try { if (editing?.id) { const result = await updateCustomer({ ...editing, name, phoneNumber }); setCustomers((all) => all.map((c) => c.id === result.id ? result : c)); setSelectedId(result.id); } else { const result = await createCustomer({ name, phoneNumber }); setCustomers((all) => [...all, result]); setSelectedId(result.id); } setEditing(undefined); }
+    catch (e) { setError(e instanceof Error ? e.message : "تعذر حفظ العميل."); }
   }
-}
+  async function openBill(bill: InvoiceSummary) { try { setDetails(await getBillDetails(bill.id)); } catch (e) { setError(e instanceof Error ? e.message : "تعذر تحميل الفاتورة."); } }
+  async function payBill(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault(); if (!payingBill || !user) return; const f = new FormData(event.currentTarget);
+    try { await recordBillPayment(payingBill.id, { amount: Number(f.get("amount")), paymentMethod: String(f.get("method")), userId: user.id }); setPayingBill(undefined); setBills(await getInvoices(selectedId)); if (details?.bill.id === payingBill.id) setDetails(await getBillDetails(payingBill.id)); }
+    catch (e) { setError(e instanceof Error ? e.message : "تعذر تسجيل الدفعة."); }
+  }
 
-export default Customers
+  return <main className="page customer-page flex min-h-0 flex-col gap-4 overflow-hidden" dir="rtl">
+    <header className="flex flex-none items-center justify-between gap-4"><div><p className="mb-1 text-xs font-bold text-sendal-orange-600">إدارة العملاء</p><h1 className="m-0 text-2xl font-bold">العملاء</h1><p className="mt-2 text-sm text-slate-500">بيانات العملاء وفواتيرهم ومدفوعاتهم.</p></div><button className="rounded-lg bg-sendal-orange-500 px-4 py-2.5 text-sm font-bold text-white" onClick={() => setEditing({ id: "", name: "", phoneNumber: "" })}>إضافة عميل ＋</button></header>
+    {error && <p className="m-0 rounded-lg bg-red-50 p-3 text-sm text-red-700" role="alert">{error}<button className="mr-3" onClick={() => setError("")}>إغلاق</button></p>}
+    {loading ? <div className="grid flex-1 place-items-center text-sm text-slate-500">جارٍ تحميل العملاء…</div> : <div className="customer-layout grid min-h-0 flex-1 grid-rows-[minmax(120px,0.8fr)_minmax(0,1.2fr)] gap-4 lg:grid-cols-[minmax(230px,0.7fr)_minmax(0,1.6fr)] lg:grid-rows-1">
+      <section className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white"><div className="border-b border-slate-100 p-3"><input className="h-10 w-full rounded-lg border border-slate-200 px-3 text-sm" placeholder="بحث بالاسم أو الهاتف" value={search} onChange={(e) => { setSearch(e.target.value); setCustomerPage(1); }} /></div><div className="min-h-0 flex-1">{customerRows.map((customer) => <button key={customer.id} className={`customer-list-row ${customer.id === selectedId ? "active" : ""}`} onClick={() => { setSelectedId(customer.id); setBillPage(1); }}><strong>{customer.name}</strong><span>{customer.phoneNumber}</span></button>)}{!visible.length && <p className="p-4 text-sm text-slate-500">لا يوجد عملاء.</p>}</div><div className="customer-pager"><button disabled={customerPage <= 1} onClick={() => setCustomerPage((page) => page - 1)}>السابق</button><span>{customerPage} / {customerPageCount}</span><button disabled={customerPage >= customerPageCount} onClick={() => setCustomerPage((page) => page + 1)}>التالي</button></div></section>
+      <section className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white">{selected ? <><header className="flex flex-none flex-wrap items-center justify-between gap-3 border-b border-slate-100 p-5"><div><h2 className="m-0 text-lg font-bold">{selected.name}</h2><p className="mb-0 mt-1 text-sm text-slate-500">{selected.phoneNumber}</p></div><button className="rounded-lg border border-slate-200 px-3 py-2 text-sm" onClick={() => setEditing(selected)}>تعديل البيانات</button></header><div className="min-h-0 flex-1"><div className="flex items-center justify-between px-5 py-4"><h3 className="m-0 text-sm font-bold">فواتير العميل ({bills.length})</h3></div><table className="customer-bills-table w-full text-right text-sm"><thead className="bg-slate-50 text-xs text-slate-500"><tr><th className="p-3">رقم</th><th className="p-3">التاريخ</th><th className="p-3">الإجمالي</th><th className="p-3">المتبقي</th><th className="p-3">إجراء</th></tr></thead><tbody>{billRows.map((bill) => <tr key={bill.id} className="border-t border-slate-100"><td className="p-3">#{bill.number}</td><td className="p-3">{bill.issueDate}</td><td className="p-3">{money.format(bill.amount)}</td><td className="p-3">{money.format(bill.remaining)}</td><td className="p-3"><div className="flex flex-wrap gap-2"><button className="text-orange-700" onClick={() => void openBill(bill)}>عرض / طباعة</button>{bill.remaining > 0 && <button className="text-blue-700" onClick={() => setPayingBill(bill)}>تسجيل دفعة</button>}</div></td></tr>)}{!bills.length && <tr><td className="p-7 text-center text-slate-500" colSpan={5}>لا توجد فواتير مرتبطة بهذا العميل.</td></tr>}</tbody></table></div><div className="customer-pager"><button disabled={billPage <= 1} onClick={() => setBillPage((page) => page - 1)}>السابق</button><span>{billPage} / {billPageCount}</span><button disabled={billPage >= billPageCount} onClick={() => setBillPage((page) => page + 1)}>التالي</button></div></> : <div className="grid flex-1 place-items-center p-6 text-sm text-slate-500">اختر عميلًا لعرض بياناته وفواتيره.</div>}</section>
+    </div>}
+    {editing && <div className="payment-overlay" role="presentation"><form className="payment-dialog grid gap-4" dir="rtl" onSubmit={saveCustomer}><h2 className="m-0">{editing.id ? "تعديل عميل" : "إضافة عميل"}</h2><label className="grid gap-1 text-xs">اسم العميل<input className="h-10 rounded-lg border border-slate-200 px-3 text-sm" name="name" defaultValue={editing.name} required /></label><label className="grid gap-1 text-xs">رقم الهاتف<input className="h-10 rounded-lg border border-slate-200 px-3 text-sm" name="phone" defaultValue={editing.phoneNumber} required /></label><footer className="flex justify-between"><button type="button" className="payment-back-button" onClick={() => setEditing(undefined)}>إلغاء</button><button className="checkout-button" type="submit">حفظ</button></footer></form></div>}
+    {payingBill && <div className="payment-overlay" role="presentation"><form className="payment-dialog grid gap-4" dir="rtl" onSubmit={payBill}><h2 className="m-0">تسجيل دفعة للفاتورة #{payingBill.number}</h2><p className="m-0 text-sm text-slate-500">المتبقي {money.format(payingBill.remaining)}</p><label className="grid gap-1 text-xs">المبلغ<input className="h-10 rounded-lg border border-slate-200 px-3 text-sm" name="amount" type="number" min="0.01" max={payingBill.remaining} step="0.01" required /></label><label className="grid gap-1 text-xs">طريقة الدفع<select className="h-10 rounded-lg border border-slate-200 px-3 text-sm" name="method"><option value="cash">نقدي</option><option value="wallet">محفظة إلكترونية</option><option value="card">بطاقة</option><option value="bank">تحويل بنكي</option></select></label><footer className="flex justify-between"><button type="button" className="payment-back-button" onClick={() => setPayingBill(undefined)}>إلغاء</button><button className="checkout-button" type="submit">تأكيد الدفعة</button></footer></form></div>}
+    {details && <div className="payment-overlay receipt-overlay" role="presentation" onMouseDown={(e) => { if (e.currentTarget === e.target) setDetails(undefined); }}><section className="receipt-dialog" dir="rtl"><div className="receipt-sheet"><h2>سندال</h2><p>فاتورة بيع #{details.bill.id}</p>{selected && <p>{selected.name} — {selected.phoneNumber}</p>}<p>{new Date(details.bill.issue_datetime).toLocaleString("ar-EG")}</p><hr />{details.items.map((item) => <div className="receipt-line" key={item.id}><span>{item.name} × {item.quantity}</span><strong>{money.format(item.price * item.quantity)}</strong></div>)}<hr /><div className="receipt-line"><span>الخصم</span><strong>{money.format(details.bill.discount_amount)}</strong></div><div className="receipt-line"><span>صافي الفاتورة</span><strong>{money.format(details.bill.amount)}</strong></div><div className="receipt-line"><span>المدفوع</span><strong>{money.format(details.payments.reduce((sum, p) => sum + p.amount, 0))}</strong></div><div className="receipt-line"><span>المتبقي</span><strong>{money.format(Math.max(0, details.bill.amount - details.payments.reduce((sum, p) => sum + p.amount, 0)))}</strong></div>{details.bill.notes && <p className="receipt-notes">{details.bill.notes}</p>}</div><footer className="receipt-actions"><button className="payment-back-button" onClick={() => setDetails(undefined)}>إغلاق</button><button className="checkout-button" onClick={() => window.print()}>طباعة إيصال 80 مم</button></footer></section></div>}
+  </main>;
+}

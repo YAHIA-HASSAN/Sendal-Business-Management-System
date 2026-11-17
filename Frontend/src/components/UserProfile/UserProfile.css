@@ -1,1 +1,8 @@
 @reference "../../index.css";
+
+@layer components {
+  #user-profile { @apply items-center text-sm; }
+  #username { @apply grid gap-0.5; }
+  #username small { @apply text-[10px] text-white/50; }
+  #user-profile .icon { @apply p-1 opacity-70 hover:opacity-100; }
+}

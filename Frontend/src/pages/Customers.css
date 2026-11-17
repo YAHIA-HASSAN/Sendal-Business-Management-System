@@ -1,0 +1,31 @@
+@reference "../index.css";
+
+@layer components {
+  .customer-list-row { @apply grid w-full cursor-pointer gap-1 border-0 border-b border-slate-100 bg-white px-4 py-3 text-right hover:bg-slate-50; }
+  .customer-list-row strong { @apply text-sm text-slate-700; }
+  .customer-list-row span { @apply text-xs text-slate-400; }
+  .customer-list-row.active { @apply border-r-2 border-r-sendal-orange-500 bg-orange-50; }
+  .receipt-dialog { @apply max-h-[90dvh] w-full max-w-[420px] overflow-auto rounded-xl bg-white p-5 shadow-2xl; }
+  .receipt-sheet { @apply mx-auto w-[72mm] bg-white p-3 text-sm text-black; }
+  .receipt-sheet h2,.receipt-sheet p { @apply my-1 text-center; }
+  .receipt-sheet h2 { @apply text-xl font-bold; }
+  .receipt-sheet p { @apply text-xs; }
+  .receipt-line { @apply flex justify-between gap-2 py-1 text-xs; }
+  .receipt-notes { @apply mt-3 whitespace-pre-wrap border-t border-dashed border-slate-400 pt-2 text-right text-xs; }
+  .customer-bills-table { table-layout: fixed; }
+  .receipt-actions { @apply mt-4 flex justify-between gap-3; }
+}
+
+@media (max-width: 700px) {
+  .customer-bills-table th:nth-child(2), .customer-bills-table td:nth-child(2) { display: none; }
+  .customer-bills-table th, .customer-bills-table td { padding: 8px 5px; font-size: 11px; }
+}
+
+@media print {
+  @page { size: 80mm auto; margin: 3mm; }
+  body * { visibility: hidden !important; }
+  .receipt-overlay,.receipt-overlay * { visibility: visible !important; }
+  .receipt-overlay { position: fixed !important; inset: 0 !important; display: block !important; overflow: visible !important; padding: 0 !important; background: white !important; }
+  .receipt-dialog { position: absolute !important; top: 0 !important; right: 0 !important; width: 74mm !important; max-width: none !important; max-height: none !important; overflow: visible !important; padding: 0 !important; box-shadow: none !important; }
+  .receipt-actions { display: none !important; }
+}

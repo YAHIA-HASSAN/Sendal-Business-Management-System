@@ -19,6 +19,7 @@ type Props = {
   invalidDiscount: boolean;
   error: string;
   onCustomerChange: (customerId: string) => void;
+  onCreateCustomer: () => void;
   onWarrantyChange: (value: string) => void;
   onNotesChange: (value: string) => void;
   onDiscountChange: (amount: number) => void;
@@ -31,7 +32,7 @@ type Props = {
 
 export default function Purchase({
   items, products, customers, customerId, warranty, notes, subtotal, total, discountAmount,
-  isDiscountApproved, invalidDiscount, error, onCustomerChange, onWarrantyChange, onNotesChange,
+  isDiscountApproved, invalidDiscount, error, onCustomerChange, onCreateCustomer, onWarrantyChange, onNotesChange,
   onDiscountChange, onRequestDiscountApproval, onQuantityChange, onRemoveLine, onClearInvoice,
   onContinueToPayment,
 }: Props) {
@@ -54,6 +55,7 @@ export default function Purchase({
         warranty={warranty}
         notes={notes}
         onCustomerChange={onCustomerChange}
+        onCreateCustomer={onCreateCustomer}
         onWarrantyChange={onWarrantyChange}
         onNotesChange={onNotesChange}
       />

@@ -1,33 +1,17 @@
-import { Component } from "react";
-import "./Navbar.css";
 import { NavLink } from "react-router-dom";
-export class Navbar extends Component {
-  render() {
-    return (
-      <nav>
-        <NavLink to="/POS">
-          <div className="button justify-self-center m-4">فاتورة جديدة +</div>
-        </NavLink>
-        <ul>
-          <NavLink to="/Home">
-            <li>الرئيسية</li>
-          </NavLink>
-          <NavLink to="/Bills">
-            <li>الفواتير</li>
-          </NavLink>
-          <NavLink to="/Inventory">
-            <li>المخزن</li>
-          </NavLink>
-          <NavLink to="/Customers">
-            <li>العملاء</li>
-          </NavLink>
-          <NavLink to="/Maintenance">
-            <li>الصيانة</li>
-          </NavLink>
-        </ul>
-      </nav>
-    );
-  }
-}
+import { useAuth } from "../../auth/AuthContext";
+import "./Navbar.css";
 
-export default Navbar;
+export default function Navbar() {
+  const { user } = useAuth();
+  const links: Array<[string, string]> = [["/Home", "الرئيسية"], ["/Bills", "الفواتير"], ["/Customers", "العملاء"]];
+  if (user?.role === "admin") links.push(["/Inventory", "المخزن"], ["/Users", "المستخدمون"]);
+  return (
+    <nav className="side-nav" aria-label="التنقل الرئيسي">
+      <NavLink to="/POS" className="side-new-invoice">فاتورة جديدة <span aria-hidden="true">＋</span></NavLink>
+      <ul>
+        {links.map(([to, label]) => <li key={to}><NavLink to={to} className={({ isActive }) => isActive ? "side-nav-link active" : "side-nav-link"}>{label}</NavLink></li>)}
+      </ul>
+    </nav>
+  );
+}

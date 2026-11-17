@@ -17,6 +17,7 @@ type Props = {
   payments: PaymentDraft[];
   invalidPayments: boolean;
   error: string;
+  isIssuing?: boolean;
   onAddPayment: () => void;
   onUpdatePayment: (paymentId: string, updates: Partial<PaymentDraft>) => void;
   onRemovePayment: (paymentId: string) => void;
@@ -25,7 +26,7 @@ type Props = {
 };
 
 export default function PaymentDialog({
-  total, paid, remaining, payments, invalidPayments, error,
+  total, paid, remaining, payments, invalidPayments, error, isIssuing = false,
   onAddPayment, onUpdatePayment, onRemovePayment, onClose, onIssue,
 }: Props) {
   const invalidTotal = paid > total + 0.001;
@@ -70,7 +71,7 @@ export default function PaymentDialog({
         {error && <p className="pos-error" role="alert">{error}</p>}
         <footer className="payment-actions">
           <button className="payment-back-button" type="button" onClick={onClose}>العودة للفاتورة</button>
-          <button className="checkout-button" type="button" disabled={invalidTotal || invalidPayments} onClick={onIssue}>إصدار الفاتورة</button>
+          <button className="checkout-button" type="button" disabled={invalidTotal || invalidPayments || isIssuing} onClick={onIssue}>{isIssuing ? "جارٍ الإصدار…" : "إصدار الفاتورة"}</button>
         </footer>
       </section>
     </div>

@@ -1,13 +1,43 @@
-import { Component } from 'react'
+import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { createCategory, createProduct, getCategories, getInventoryProducts, updateProduct, type ProductInput } from "../api/client";
+import { useAuth } from "../auth/AuthContext";
+import type { Category, Product } from "../data/invoiceStore";
+import "./Inventory.css";
 
-export class Inventory extends Component {
-  render() {
-    return (
-      <div id='inventory' className='page'>
-        INVENTORY
-      </div>
-    )
+const money = new Intl.NumberFormat("ar-EG", { style: "currency", currency: "EGP", maximumFractionDigits: 2 });
+const inputClass = "h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none focus:border-orange-400";
+
+export default function Inventory() {
+  const { user } = useAuth();
+  const [products, setProducts] = useState<Product[]>([]); const [categories, setCategories] = useState<Category[]>([]);
+  const [search, setSearch] = useState(""); const [page, setPage] = useState(1); const [loading, setLoading] = useState(true); const [error, setError] = useState("");
+  const [editing, setEditing] = useState<Product>(); const [showProductForm, setShowProductForm] = useState(false); const [categoryName, setCategoryName] = useState(""); const [stockProduct, setStockProduct] = useState<Product>();
+  async function refresh() { setLoading(true); setError(""); try { const [p, c] = await Promise.all([getInventoryProducts(), getCategories()]); setProducts(p); setCategories(c); } catch (e) { setError(e instanceof Error ? e.message : "تعذر تحميل المخزون."); } finally { setLoading(false); } }
+  useEffect(() => {
+    let active = true;
+    Promise.all([getInventoryProducts(), getCategories()]).then(([p, c]) => {
+      if (active) { setProducts(p); setCategories(c); }
+    }).catch((e: unknown) => { if (active) setError(e instanceof Error ? e.message : "تعذر تحميل المخزون."); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, []);
+  const visible = useMemo(() => { const q = search.trim().toLocaleLowerCase("ar"); return products.filter((p) => `${p.name} ${p.code} ${p.categoryId}`.toLocaleLowerCase("ar").includes(q)); }, [products, search]);
+  const pageCount = Math.max(1, Math.ceil(visible.length / 6)); const pageRows = visible.slice((page - 1) * 6, page * 6);
+  async function saveProduct(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault(); if (!user) return; const f = new FormData(event.currentTarget);
+    const data: ProductInput = { name: String(f.get("name")).trim(), code: String(f.get("code")).trim(), category: String(f.get("category")), stock: Number(f.get("stock")), warranty: String(f.get("warranty")), selling_price: Number(f.get("selling_price")), buying_price: Number(f.get("buying_price")), user_id: user.id };
+    try { if (editing) await updateProduct(editing.id, { ...data, active: editing.active }); else { await createProduct(data); setPage(Math.ceil((products.length + 1) / 6)); } setEditing(undefined); setShowProductForm(false); await refresh(); }
+    catch (e) { setError(e instanceof Error ? e.message : "تعذر حفظ المنتج."); }
   }
-}
+  async function saveCategory(event: FormEvent<HTMLFormElement>) { event.preventDefault(); try { const category = await createCategory(categoryName.trim()); setCategories((all) => [...all, category]); setCategoryName(""); } catch (e) { setError(e instanceof Error ? e.message : "تعذر إضافة التصنيف."); } }
+  async function adjustStock(event: FormEvent<HTMLFormElement>) { event.preventDefault(); if (!stockProduct || !user) return; const value = Number(new FormData(event.currentTarget).get("delta")); try { await updateProduct(stockProduct.id, { stock_delta: value, user_id: user.id }); setStockProduct(undefined); await refresh(); } catch (e) { setError(e instanceof Error ? e.message : "تعذر تعديل المخزون."); } }
 
-export default Inventory
+  return <main className="page flex min-h-0 flex-col gap-4 overflow-hidden" dir="rtl">
+    <header className="flex flex-none flex-wrap items-center justify-between gap-4"><div><p className="mb-1 text-xs font-bold text-sendal-orange-600">إدارة المنتجات</p><h1 className="m-0 text-2xl font-bold">المخزون</h1><p className="mt-2 text-sm text-slate-500">إدارة المنتجات والأسعار والكميات المتاحة.</p></div><button className="rounded-lg bg-sendal-orange-500 px-4 py-2.5 text-sm font-bold text-white" onClick={() => { setEditing(undefined); setShowProductForm(true); }}>إضافة منتج ＋</button></header>
+    <div className="flex flex-none flex-wrap items-end gap-3 rounded-xl border border-slate-200 bg-white p-3"><label className="grid min-w-52 flex-1 gap-1 text-xs text-slate-500">بحث<input className={inputClass} placeholder="اسم المنتج أو الكود أو التصنيف" value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} /></label><form className="flex flex-1 items-end gap-2" onSubmit={saveCategory}><label className="grid flex-1 gap-1 text-xs text-slate-500">تصنيف جديد<input className={inputClass} value={categoryName} onChange={(e) => setCategoryName(e.target.value)} placeholder="اسم التصنيف" required /></label><button className="h-10 rounded-lg border border-slate-200 px-4 text-sm font-semibold" type="submit">إضافة تصنيف</button></form></div>
+    {error && <div className="flex flex-none justify-between rounded-lg bg-red-50 p-3 text-sm text-red-700" role="alert">{error}<button onClick={() => setError("")}>×</button></div>}
+    {loading ? <p className="grid flex-1 place-items-center text-sm text-slate-500">جارٍ تحميل المنتجات…</p> : <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white"><div className="min-h-0 flex-1"><table className="inventory-table w-full text-right text-sm"><thead className="bg-slate-50 text-xs text-slate-500"><tr>{["المنتج", "الكود", "التصنيف", "المخزون", "سعر الشراء", "سعر البيع", "الحالة", "إجراءات"].map((h) => <th key={h} className="p-3">{h}</th>)}</tr></thead><tbody>{pageRows.map((p) => <tr key={p.id} className="border-t border-slate-100"><td className="p-3 font-semibold">{p.name}</td><td className="p-3">{p.code}</td><td className="p-3">{p.categoryId}</td><td className="p-3">{p.stock}</td><td className="p-3">{money.format(p.buyingPrice ?? 0)}</td><td className="p-3">{money.format(p.unitPrice)}</td><td className="p-3">{p.active ? "نشط" : "مؤرشف"}</td><td className="p-3"><div className="flex flex-wrap gap-2"><button className="text-orange-700" onClick={() => { setEditing(p); setShowProductForm(true); }}>تعديل</button><button className="text-slate-600" onClick={() => setStockProduct(p)}>المخزون</button>{p.active && <button className="text-red-600" onClick={async () => { try { await updateProduct(p.id, { active: false, user_id: user?.id }); await refresh(); } catch (e) { setError(e instanceof Error ? e.message : "تعذرت أرشفة المنتج."); } }}>أرشفة</button>}</div></td></tr>)}{visible.length === 0 && <tr><td className="p-8 text-center text-slate-500" colSpan={8}>لا توجد منتجات مطابقة.</td></tr>}</tbody></table></div><div className="customer-pager"><button disabled={page <= 1} onClick={() => setPage((value) => value - 1)}>السابق</button><span>{page} / {pageCount} · {visible.length} منتج</span><button disabled={page >= pageCount} onClick={() => setPage((value) => value + 1)}>التالي</button></div></section>}
+    {(showProductForm || editing) && <div className="payment-overlay" role="presentation"><form className="payment-dialog grid gap-3" dir="rtl" onSubmit={saveProduct}><h2 className="m-0">{editing ? "تعديل المنتج" : "إضافة منتج"}</h2><label className="grid gap-1 text-xs">اسم المنتج<input className={inputClass} name="name" defaultValue={editing?.name} required /></label><label className="grid gap-1 text-xs">الكود<input className={inputClass} name="code" defaultValue={editing?.code} required /></label><label className="grid gap-1 text-xs">التصنيف<select className={inputClass} name="category" defaultValue={editing?.categoryId ?? categories[0]?.name} required>{categories.map((c) => <option key={c.id}>{c.name}</option>)}</select></label><div className="grid grid-cols-2 gap-3"><label className="grid gap-1 text-xs">المخزون الابتدائي<input className={inputClass} name="stock" type="number" min="0" step="1" defaultValue={editing?.stock ?? 0} required disabled={!!editing} /></label><label className="grid gap-1 text-xs">الضمان<input className={inputClass} name="warranty" defaultValue={editing?.warranty ?? "بدون ضمان"} /></label><label className="grid gap-1 text-xs">سعر الشراء<input className={inputClass} name="buying_price" type="number" min="0" step="0.01" defaultValue={editing?.buyingPrice ?? 0} required /></label><label className="grid gap-1 text-xs">سعر البيع<input className={inputClass} name="selling_price" type="number" min="0.01" step="0.01" defaultValue={editing?.unitPrice ?? 1} required /></label></div>{editing && <label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={!editing.active} onChange={(event) => setEditing({ ...editing, active: !event.target.checked })} /> مؤرشف</label>}<footer className="flex justify-between gap-3 pt-2"><button className="payment-back-button" type="button" onClick={() => { setEditing(undefined); setShowProductForm(false); }}>إلغاء</button><button className="checkout-button" type="submit">حفظ</button></footer></form></div>}
+    {stockProduct && <div className="payment-overlay" role="presentation"><form className="payment-dialog grid gap-4" dir="rtl" onSubmit={adjustStock}><h2 className="m-0">تعديل مخزون {stockProduct.name}</h2><p className="m-0 text-sm text-slate-500">المتاح حاليًا: {stockProduct.stock}. أدخل كمية موجبة للإضافة أو سالبة للصرف.</p><input className={inputClass} name="delta" type="number" step="1" required autoFocus /><footer className="flex justify-between"><button type="button" className="payment-back-button" onClick={() => setStockProduct(undefined)}>إلغاء</button><button type="submit" className="checkout-button">حفظ الحركة</button></footer></form></div>}
+  </main>;
+}

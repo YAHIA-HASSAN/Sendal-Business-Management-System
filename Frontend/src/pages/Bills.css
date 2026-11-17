@@ -1,5 +1,8 @@
 @reference "../index.css";
 @layer components {
+.bills-state { @apply grid min-h-0 flex-1 place-items-center text-sm text-[#7b8799]; }
+.bills-state-error { @apply gap-3 text-[#aa3730]; }
+.bills-state-error button { @apply cursor-pointer rounded-lg border-0 bg-sendal-orange-500 px-4 py-2 text-white; }
 .bills-page {
   display: flex;
   min-height: 0;

@@ -6,15 +6,16 @@ type Props = {
   warranty: string;
   notes: string;
   onCustomerChange: (customerId: string) => void;
+  onCreateCustomer: () => void;
   onWarrantyChange: (value: string) => void;
   onNotesChange: (value: string) => void;
 };
 
-export default function InvoiceDetails({ customers, customerId, warranty, notes, onCustomerChange, onWarrantyChange, onNotesChange }: Props) {
+export default function InvoiceDetails({ customers, customerId, warranty, notes, onCustomerChange, onCreateCustomer, onWarrantyChange, onNotesChange }: Props) {
   return (
     <div className="invoice-details-fields">
       <label className="invoice-field">
-        <span>العميل <small>اختياري</small></span>
+        <span>العميل <small>اختياري</small><button type="button" className="inline-add-customer" onClick={onCreateCustomer}>إضافة جديد ＋</button></span>
         <select value={customerId} onChange={(event) => onCustomerChange(event.target.value)}>
           <option value="">عميل نقدي / بدون تسجيل</option>
           {customers.map((customer) => <option key={customer.id} value={customer.id}>{customer.name} — {customer.phoneNumber}</option>)}

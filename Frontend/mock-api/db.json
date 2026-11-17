@@ -1,41 +1,506 @@
 {
   "users": [
-    { "id": "user-demo", "name": "نوح", "username": "noah", "password": "demo123", "role": "seller" },
-    { "id": "admin-demo", "name": "مدير تجريبي", "username": "admin", "password": "demo123", "role": "admin" }
+    {
+      "id": "user-demo",
+      "username": "noah",
+      "password_hashed": "1234",
+      "role": "seller",
+      "name": "نوح",
+      "start_date": "2024-03-01",
+      "salary": 8500,
+      "mobile_number": "01000000001"
+    },
+    {
+      "id": "admin-demo",
+      "username": "admin",
+      "password_hashed": "1234",
+      "role": "admin",
+      "name": "مدير تجريبي",
+      "start_date": "2023-01-15",
+      "salary": 15000,
+      "mobile_number": "01000000002"
+    },
+    {
+      "name": "ahmed",
+      "username": "ahmed",
+      "role": "seller",
+      "start_date": "2026-11-17",
+      "salary": 0,
+      "mobile_number": "",
+      "id": "68c2921b-d7ad-4f23-87c3-af9a2d0d008a",
+      "password_hashed": "sha256:8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92"
+    }
   ],
   "customers": [
-    { "id": "customer-001", "name": "أحمد محمد", "phoneNumber": "01012345678" },
-    { "id": "customer-002", "name": "محمود علي", "phoneNumber": "01123456789" },
-    { "id": "customer-003", "name": "سارة حسن", "phoneNumber": "01234567890" }
+    {
+      "id": "customer-001",
+      "name": "أحمد محمد",
+      "phone_number": "01012345678"
+    },
+    {
+      "id": "customer-002",
+      "name": "محمود علي",
+      "phone_number": "01123456789"
+    },
+    {
+      "id": "customer-003",
+      "name": "سارة حسن",
+      "phone_number": "01234567890"
+    }
   ],
   "categories": [
-    { "id": "category-accessories", "name": "إكسسوارات" },
-    { "id": "category-parts", "name": "قطع غيار" },
-    { "id": "category-audio", "name": "صوتيات" }
+    {
+      "name": "إكسسوارات"
+    },
+    {
+      "name": "قطع غيار"
+    },
+    {
+      "name": "صوتيات"
+    }
   ],
   "products": [
-    { "id": "product-001", "name": "شاشة ايفون 13", "code": "SCR-IP13", "categoryId": "category-parts", "stock": 8, "active": true, "unitPrice": 1250 },
-    { "id": "product-002", "name": "شاحن سريع Type-C", "code": "CHR-TC20", "categoryId": "category-accessories", "stock": 15, "active": true, "unitPrice": 320 },
-    { "id": "product-003", "name": "سماعة بلوتوث", "code": "AUD-BT01", "categoryId": "category-audio", "stock": 9, "active": true, "unitPrice": 475 },
-    { "id": "product-004", "name": "جراب ايفون 13", "code": "CAS-IP13", "categoryId": "category-accessories", "stock": 22, "active": true, "unitPrice": 180 },
-    { "id": "product-005", "name": "كابل شحن Type-C", "code": "CBL-TC01", "categoryId": "category-accessories", "stock": 30, "active": true, "unitPrice": 95 },
-    { "id": "product-006", "name": "بطارية سامسونج A52", "code": "BAT-SA52", "categoryId": "category-parts", "stock": 4, "active": true, "unitPrice": 690 },
-    { "id": "product-007", "name": "لاصقة حماية شاشة", "code": "GLS-UNI1", "categoryId": "category-accessories", "stock": 40, "active": true, "unitPrice": 75 },
-    { "id": "product-008", "name": "سماعة سلكية", "code": "AUD-WR01", "categoryId": "category-audio", "stock": 0, "active": true, "unitPrice": 140 }
+    {
+      "id": "product-001",
+      "name": "شاشة ايفون 13",
+      "code": "SCR-IP13",
+      "active": true,
+      "category": "قطع غيار",
+      "stock": 17,
+      "warranty": "90 يوم"
+    },
+    {
+      "id": "product-002",
+      "name": "شاحن سريع Type-C",
+      "code": "CHR-TC20",
+      "active": true,
+      "category": "إكسسوارات",
+      "stock": 14,
+      "warranty": "30 يوم"
+    },
+    {
+      "id": "product-003",
+      "name": "سماعة بلوتوث",
+      "code": "AUD-BT01",
+      "active": true,
+      "category": "صوتيات",
+      "stock": 7,
+      "warranty": "30 يوم"
+    },
+    {
+      "id": "product-004",
+      "name": "جراب ايفون 13",
+      "code": "CAS-IP13",
+      "active": true,
+      "category": "إكسسوارات",
+      "stock": 19,
+      "warranty": "بدون ضمان"
+    },
+    {
+      "id": "product-005",
+      "name": "كابل شحن Type-C",
+      "code": "CBL-TC01",
+      "active": true,
+      "category": "إكسسوارات",
+      "stock": 30,
+      "warranty": "30 يوم"
+    },
+    {
+      "id": "product-006",
+      "name": "بطارية سامسونج A52",
+      "code": "BAT-SA52",
+      "active": true,
+      "category": "قطع غيار",
+      "stock": 4,
+      "warranty": "90 يوم"
+    },
+    {
+      "id": "product-007",
+      "name": "لاصقة حماية شاشة",
+      "code": "GLS-UNI1",
+      "active": true,
+      "category": "إكسسوارات",
+      "stock": 40,
+      "warranty": "بدون ضمان"
+    },
+    {
+      "id": "product-008",
+      "name": "سماعة سلكية",
+      "code": "AUD-WR01",
+      "active": true,
+      "category": "صوتيات",
+      "stock": 0,
+      "warranty": "30 يوم"
+    }
   ],
   "sellingPriceHistory": [
-    { "id": "price-001", "productId": "product-001", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 1250 },
-    { "id": "price-002", "productId": "product-002", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 320 },
-    { "id": "price-003", "productId": "product-003", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 475 },
-    { "id": "price-004", "productId": "product-004", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 180 },
-    { "id": "price-005", "productId": "product-005", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 95 },
-    { "id": "price-006", "productId": "product-006", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 690 },
-    { "id": "price-007", "productId": "product-007", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 75 },
-    { "id": "price-008", "productId": "product-008", "datetimeOfPriceUpdate": "2026-11-01T09:00:00.000Z", "sellingPricePerEach": 140 }
+    {
+      "id": "sell-price-001",
+      "product_id": "product-001",
+      "selling_price_per_each": 1250,
+      "datetime_of_price_update": "2026-11-01T09:00:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-002",
+      "product_id": "product-002",
+      "selling_price_per_each": 320,
+      "datetime_of_price_update": "2026-11-01T09:00:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-003",
+      "product_id": "product-003",
+      "selling_price_per_each": 475,
+      "datetime_of_price_update": "2026-11-01T09:00:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-004",
+      "product_id": "product-004",
+      "selling_price_per_each": 180,
+      "datetime_of_price_update": "2026-11-01T09:00:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-005",
+      "product_id": "product-005",
+      "selling_price_per_each": 95,
+      "datetime_of_price_update": "2026-11-01T09:00:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-006",
+      "product_id": "product-006",
+      "selling_price_per_each": 690,
+      "datetime_of_price_update": "2026-11-01T09:00:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-007",
+      "product_id": "product-007",
+      "selling_price_per_each": 75,
+      "datetime_of_price_update": "2026-11-01T09:00:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-008",
+      "product_id": "product-008",
+      "selling_price_per_each": 140,
+      "datetime_of_price_update": "2026-11-01T09:00:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-99a8551d-1abc-4a8d-9fd4-53690e163912",
+      "product_id": "product-001",
+      "selling_price_per_each": 1250,
+      "datetime_of_price_update": "2026-11-17T20:17:37.798Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "sell-price-4a40de44-5fba-4286-a637-0559094fbc9c",
+      "product_id": "product-001",
+      "selling_price_per_each": 1250,
+      "datetime_of_price_update": "2026-11-17T20:17:53.549Z",
+      "user_id": "admin-demo"
+    }
   ],
-  "bills": [],
-  "soldItems": [],
-  "paymentHistory": [],
-  "cashMovements": [],
-  "cashDrawers": [ { "id": "drawer-main", "balance": 0, "lastUpdate": null } ]
+  "buyingPriceHistory": [
+    {
+      "id": "buy-price-001",
+      "product_id": "product-001",
+      "buying_price_per_each": 950,
+      "datetime_of_price_update": "2026-11-01T08:30:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-002",
+      "product_id": "product-002",
+      "buying_price_per_each": 210,
+      "datetime_of_price_update": "2026-11-01T08:30:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-003",
+      "product_id": "product-003",
+      "buying_price_per_each": 315,
+      "datetime_of_price_update": "2026-11-01T08:30:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-004",
+      "product_id": "product-004",
+      "buying_price_per_each": 95,
+      "datetime_of_price_update": "2026-11-01T08:30:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-005",
+      "product_id": "product-005",
+      "buying_price_per_each": 45,
+      "datetime_of_price_update": "2026-11-01T08:30:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-006",
+      "product_id": "product-006",
+      "buying_price_per_each": 510,
+      "datetime_of_price_update": "2026-11-01T08:30:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-007",
+      "product_id": "product-007",
+      "buying_price_per_each": 28,
+      "datetime_of_price_update": "2026-11-01T08:30:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-008",
+      "product_id": "product-008",
+      "buying_price_per_each": 60,
+      "datetime_of_price_update": "2026-11-01T08:30:00.000Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-9ae41fb6-1c81-45ec-b844-9682a6952826",
+      "product_id": "product-001",
+      "buying_price_per_each": 950,
+      "datetime_of_price_update": "2026-11-17T20:17:37.798Z",
+      "user_id": "admin-demo"
+    },
+    {
+      "id": "buy-price-ee33ee2e-76cf-4936-a266-b7a9a1ab5171",
+      "product_id": "product-001",
+      "buying_price_per_each": 950,
+      "datetime_of_price_update": "2026-11-17T20:17:53.549Z",
+      "user_id": "admin-demo"
+    }
+  ],
+  "bills": [
+    {
+      "id": "bill-1001",
+      "issue_datetime": "2026-11-12T10:15:00.000Z",
+      "status": "paid",
+      "seller_id": "user-demo",
+      "buyer_id": "customer-001",
+      "notes": "تسليم داخل المتجر",
+      "amount": 1500,
+      "discount_amount": 70
+    },
+    {
+      "id": "bill-1002",
+      "issue_datetime": "2026-11-13T13:40:00.000Z",
+      "status": "partial",
+      "seller_id": "user-demo",
+      "buyer_id": "customer-002",
+      "notes": "متبقي 450 جنيه",
+      "amount": 950,
+      "discount_amount": 0
+    },
+    {
+      "id": "bill-1003",
+      "issue_datetime": "2026-11-15T16:05:00.000Z",
+      "status": "unpaid",
+      "seller_id": "user-demo",
+      "buyer_id": null,
+      "notes": "بيع نقدي آجل",
+      "amount": 500,
+      "discount_amount": 40
+    }
+  ],
+  "soldItems": [
+    {
+      "id": "sold-1001-1",
+      "product_id": "product-001",
+      "bill_id": "bill-1001",
+      "quantity": 1,
+      "price_per_each": 1250
+    },
+    {
+      "id": "sold-1001-2",
+      "product_id": "product-002",
+      "bill_id": "bill-1001",
+      "quantity": 1,
+      "price_per_each": 320
+    },
+    {
+      "id": "sold-1002-1",
+      "product_id": "product-003",
+      "bill_id": "bill-1002",
+      "quantity": 2,
+      "price_per_each": 475
+    },
+    {
+      "id": "sold-1003-1",
+      "product_id": "product-004",
+      "bill_id": "bill-1003",
+      "quantity": 3,
+      "price_per_each": 180
+    }
+  ],
+  "paymentHistory": [
+    {
+      "id": "payment-1001-1",
+      "amount": 1000,
+      "payment_method": "cash",
+      "datetime": "2026-11-12T10:16:00.000Z",
+      "bill_id": "bill-1001"
+    },
+    {
+      "id": "payment-1001-2",
+      "amount": 500,
+      "payment_method": "card",
+      "datetime": "2026-11-12T10:16:30.000Z",
+      "bill_id": "bill-1001"
+    },
+    {
+      "id": "payment-1002-1",
+      "amount": 500,
+      "payment_method": "cash",
+      "datetime": "2026-11-13T13:41:00.000Z",
+      "bill_id": "bill-1002"
+    },
+    {
+      "id": "payment-74835e52-c386-402e-97cc-36323e1df7b3",
+      "amount": 150,
+      "payment_method": "cash",
+      "datetime": "2026-11-17T20:41:10.798Z",
+      "bill_id": "bill-1002"
+    }
+  ],
+  "cashMovements": [
+    {
+      "id": "cash-1001-1",
+      "date_time": "2026-11-12T10:16:00.000Z",
+      "amount": 1000,
+      "type": "in",
+      "reason": "دفعة نقدية للفاتورة bill-1001",
+      "user_id": "user-demo",
+      "bill_id": "bill-1001"
+    },
+    {
+      "id": "cash-1002-1",
+      "date_time": "2026-11-13T13:41:00.000Z",
+      "amount": 500,
+      "type": "in",
+      "reason": "دفعة نقدية للفاتورة bill-1002",
+      "user_id": "user-demo",
+      "bill_id": "bill-1002"
+    },
+    {
+      "id": "cash-130249c1-4ea0-47a4-8073-68b7b1584db1",
+      "date_time": "2026-11-17T20:41:10.798Z",
+      "amount": 150,
+      "type": "in",
+      "reason": "دفعة نقدية للفاتورة bill-1002",
+      "user_id": "user-demo",
+      "bill_id": "bill-1002"
+    }
+  ],
+  "stockMovements": [
+    {
+      "id": "stock-opening-001",
+      "type": "in",
+      "quantity": 8,
+      "product_id": "product-001",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "stock-opening-002",
+      "type": "in",
+      "quantity": 15,
+      "product_id": "product-002",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "stock-opening-003",
+      "type": "in",
+      "quantity": 9,
+      "product_id": "product-003",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "stock-opening-004",
+      "type": "in",
+      "quantity": 22,
+      "product_id": "product-004",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "stock-opening-005",
+      "type": "in",
+      "quantity": 30,
+      "product_id": "product-005",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "stock-opening-006",
+      "type": "in",
+      "quantity": 4,
+      "product_id": "product-006",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "stock-opening-007",
+      "type": "in",
+      "quantity": 40,
+      "product_id": "product-007",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "stock-1001-1",
+      "type": "out",
+      "quantity": 1,
+      "product_id": "product-001",
+      "user_id": "user-demo",
+      "bill_id": "bill-1001"
+    },
+    {
+      "id": "stock-1001-2",
+      "type": "out",
+      "quantity": 1,
+      "product_id": "product-002",
+      "user_id": "user-demo",
+      "bill_id": "bill-1001"
+    },
+    {
+      "id": "stock-1002-1",
+      "type": "out",
+      "quantity": 2,
+      "product_id": "product-003",
+      "user_id": "user-demo",
+      "bill_id": "bill-1002"
+    },
+    {
+      "id": "stock-1003-1",
+      "type": "out",
+      "quantity": 3,
+      "product_id": "product-004",
+      "user_id": "user-demo",
+      "bill_id": "bill-1003"
+    },
+    {
+      "id": "stock-ee491f58-4d7f-47a8-a1df-1bfa36db0e4e",
+      "type": "in",
+      "quantity": 10,
+      "product_id": "product-001",
+      "user_id": "admin-demo",
+      "bill_id": null
+    }
+  ],
+  "cashDrawers": [
+    {
+      "id": "drawer-main",
+      "balance": 1650,
+      "last_cash_movement": "cash-130249c1-4ea0-47a4-8073-68b7b1584db1"
+    }
+  ]
 }

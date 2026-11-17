@@ -1,29 +1,10 @@
 @reference "../../index.css";
 
-nav li {
-    @apply  relative
-            w-full 
-            my-4 
-            px-7 
-            py-3 
-            cursor-pointer;
-}
-
-
-nav li::after {
-    content: '';
-    @apply  absolute 
-            bottom-0 
-            left-1/2 
-            h-[1px] 
-            w-0 
-            bg-[#FA8813] 
-            transition-all 
-            duration-500;
-    
-    transform: translateX(-50%);
-}
-
-nav li:hover::after {
-    @apply w-full;
+@layer components {
+  .side-nav ul { @apply mt-5 list-none p-0; }
+  .side-nav ul li { @apply m-0 p-0; }
+  .side-nav-link { @apply block rounded-lg px-4 py-3 text-sm text-white/75 transition hover:bg-white/5 hover:text-white; }
+  .side-nav-link.active { @apply bg-white/10 font-bold text-white; }
+  .side-new-invoice { @apply mt-6 flex items-center justify-center gap-2 rounded-lg bg-sendal-orange-500 p-3 text-sm font-bold text-white hover:bg-sendal-orange-600; }
+  .side-new-invoice span { @apply text-lg; }
 }

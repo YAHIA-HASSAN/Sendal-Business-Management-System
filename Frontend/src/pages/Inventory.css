@@ -1,0 +1,13 @@
+@reference "../index.css";
+
+@layer components {
+  .inventory-table { table-layout: fixed; }
+  .inventory-table td { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 850px) {
+  .inventory-table th:nth-child(2), .inventory-table td:nth-child(2),
+  .inventory-table th:nth-child(3), .inventory-table td:nth-child(3),
+  .inventory-table th:nth-child(5), .inventory-table td:nth-child(5) { display: none; }
+  .inventory-table th, .inventory-table td { padding: 8px 5px; }
+}

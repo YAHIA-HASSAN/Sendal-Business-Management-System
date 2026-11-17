@@ -15,7 +15,7 @@ Vite proxies `/api` requests to `http://localhost:3001`, so frontend requests ca
 
 Available resources support `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`:
 
-`/api/users`, `/api/customers`, `/api/categories`, `/api/products`, `/api/sellingPriceHistory`, `/api/bills`, `/api/soldItems`, `/api/paymentHistory`, `/api/cashMovements`, and `/api/cashDrawers`.
+`/api/users`, `/api/customers`, `/api/categories`, `/api/products`, `/api/sellingPriceHistory`, `/api/buyingPriceHistory`, `/api/bills`, `/api/soldItems`, `/api/paymentHistory`, `/api/cashMovements`, `/api/stockMovements`, and `/api/cashDrawers`.
 
 Examples:
 
@@ -25,7 +25,9 @@ curl "http://localhost:3001/api/bills?status=paid"
 curl -X POST http://localhost:3001/api/auth/login -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"demo123\"}"
 ```
 
-The demo login accepts `admin / demo123` and `noah / demo123`. This mock API is for local development only: it stores data in a JSON file and its login token does not secure the other routes. Reset `mock-api/db.json` from version control to restore the seed data.
+The demo login accepts `admin / demo123` and `noah / demo123`. Demo user passwords are stored as SHA-256 hashes in the seed file. The schema-shaped seed includes linked bills, sold items, payment history, cash movements, stock movements, current stock, and both price histories. This mock API is for local development only: it stores data in a JSON file and its login token does not secure the other routes. Reset `mock-api/db.json` from version control to restore the seed data.
+
+The UI also uses workflow endpoints: `POST /api/bills/issue` atomically records a sale and its movements, `POST /api/bills/:id/payments` records later payments, `POST /api/auth/approve-discount` approves a discount with an admin account, and `/api/inventory/products` records price and stock history. The demo session is stored according to “Remember me”; role checks are UI-only until the real backend adds authorization.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

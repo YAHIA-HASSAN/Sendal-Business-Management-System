@@ -2,20 +2,20 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm, { type LoginCredentials } from "../components/LoginForm/LoginForm";
 import { mockLogin } from "../api/client";
+import { useAuth } from "../auth/AuthContext";
 import sendalLogo from "../assets/sendal-logo.png";
 import "./Login.css";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [message, setMessage] = useState("");
 
   async function handleLogin(credentials: LoginCredentials) {
     setMessage("");
     try {
       const result = await mockLogin(credentials.username, credentials.password);
-      const storage = credentials.rememberMe ? localStorage : sessionStorage;
-      storage.setItem("sendal.demo-token", result.token);
-      localStorage.setItem("sendal.demo-user", JSON.stringify(result.user));
+      login(result.user, result.token, credentials.rememberMe);
       navigate("/Home", { replace: true });
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "تعذر الاتصال بخادم الاختبار.");

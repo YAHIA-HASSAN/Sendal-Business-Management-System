@@ -47,6 +47,8 @@
   .panel-count {
     @apply whitespace-nowrap rounded-full bg-[#fff3e5] px-[10px] py-1.5 text-xs text-[#e47b0c];
   }
+  .page-state { @apply grid min-h-0 flex-1 place-items-center rounded-2xl bg-white p-8 text-sm text-[#7b8799]; }
+  .page-state.error { @apply text-[#aa3730]; }
 }
 
 @media (max-width: 960px) {
