@@ -138,6 +138,24 @@ async function recordPayment(req, res, billId) {
   return reply(res, 201, { payment, bill });
 }
 
+async function withdrawCash(req, res) {
+  if (req.method !== "POST") return reply(res, 405, { message: "Method not allowed" });
+  const { amount, reason, user_id } = await bodyOf(req);
+  const db = await readDb();
+  const user = db.users.find((entry) => entry.id === user_id && entry.role === "admin");
+  if (!user) return reply(res, 403, { message: "هذه العملية متاحة للمدير فقط." });
+  if (!Number.isFinite(amount) || amount <= 0 || !String(reason ?? "").trim()) return reply(res, 400, { message: "أدخل مبلغًا صحيحًا وسببًا للمصروف." });
+  const drawer = db.cashDrawers[0];
+  if (!drawer) return reply(res, 409, { message: "درج النقدية غير موجود." });
+  if (amount > drawer.balance) return reply(res, 409, { message: "رصيد الخزنة غير كافٍ لإتمام السحب." });
+  const movement = { id: `cash-${randomUUID()}`, date_time: new Date().toISOString(), amount, type: "out", reason: String(reason).trim(), user_id: user.id, bill_id: null };
+  db.cashMovements.push(movement);
+  drawer.balance = Math.round((drawer.balance - amount + Number.EPSILON) * 100) / 100;
+  drawer.last_cash_movement = movement.id;
+  await saveDb(db);
+  return reply(res, 201, movement);
+}
+
 async function collection(req, res, name, id, params) {
   const db = await readDb();
   const rows = db[name];
@@ -203,6 +221,7 @@ const server = createServer(async (req, res) => {
   try {
     if (parts[1] === "auth" && parts[2] === "login") return await login(req, res);
     if (parts[1] === "auth" && parts[2] === "approve-discount") return await approveDiscount(req, res);
+    if (parts[1] === "cash-movements" && parts[2] === "withdraw") return await withdrawCash(req, res);
     if (parts[1] === "bills" && parts[2] === "issue") return await issueBill(req, res);
     if (parts[1] === "bills" && parts[3] === "payments") return await recordPayment(req, res, parts[2]);
     if (parts[1] === "inventory" && parts[2] === "products") {

@@ -73,6 +73,15 @@ type ApiDrawer = {
   balance: number;
   last_cash_movement: string | null;
 };
+export type CashMovement = {
+  id: string;
+  date_time: string;
+  amount: number;
+  type: "in" | "out";
+  reason: string;
+  user_id: string;
+  bill_id: string | null;
+};
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`/api${path}`, {
@@ -230,6 +239,16 @@ export async function getCashDrawer(): Promise<CashDrawerRecord> {
     balance: drawer.balance,
     lastUpdate: drawer.last_cash_movement,
   };
+}
+export async function getCashMovements(): Promise<CashMovement[]> {
+  return request<CashMovement[]>("/cashMovements?_sort=date_time&_order=desc");
+}
+export async function createExpense(input: { amount: number; reason: string; userId: string }) {
+  return request<CashMovement>("/cash-movements/withdraw", json("POST", {
+    amount: input.amount,
+    reason: input.reason,
+    user_id: input.userId,
+  }));
 }
 export async function getInvoices(
   customerId?: string,

@@ -9,6 +9,7 @@ import Inventory from "./pages/Inventory";
 import Login from "./pages/Login";
 import POS from "./pages/POS";
 import Users from "./pages/Users";
+import Expenses from "./pages/Expenses";
 import { useAuth } from "./auth/AuthContext";
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/Bills" element={<Bills />} />
         <Route path="/Customers" element={<Customers />} />
         <Route path="/Users" element={adminOnly(<Users />)} />
+        <Route path="/Expenses" element={adminOnly(<Expenses />)} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>

@@ -396,6 +396,69 @@
       "reason": "دفعة نقدية للفاتورة bill-1002",
       "user_id": "user-demo",
       "bill_id": "bill-1002"
+    },
+    {
+      "id": "cash-f677de50-1198-4ef3-8928-a10b1ad82f99",
+      "date_time": "2026-11-17T21:35:31.641Z",
+      "amount": 100,
+      "type": "out",
+      "reason": "فطار",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "cash-86b7bf07-e793-4883-a372-cd598cf9710f",
+      "date_time": "2026-11-17T21:36:00.807Z",
+      "amount": 100,
+      "type": "out",
+      "reason": "كهرباء",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "cash-b2fb8982-2441-454b-b485-a4656dcaf76d",
+      "date_time": "2026-11-17T21:43:44.576Z",
+      "amount": 1,
+      "type": "out",
+      "reason": "1",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "cash-f069d927-c435-42f8-b488-a04fc56c2d5a",
+      "date_time": "2026-11-17T21:43:49.127Z",
+      "amount": 1,
+      "type": "out",
+      "reason": "1",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "cash-69fc6565-8dda-42e5-b39e-486f918f9f49",
+      "date_time": "2026-11-17T21:43:49.799Z",
+      "amount": 1,
+      "type": "out",
+      "reason": "1",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "cash-fe858ce7-84c0-425f-b0c0-43067aa48ad4",
+      "date_time": "2026-11-17T21:43:55.221Z",
+      "amount": 1,
+      "type": "out",
+      "reason": "1",
+      "user_id": "admin-demo",
+      "bill_id": null
+    },
+    {
+      "id": "cash-0c03bc3a-3f5f-4897-aa7c-3e801916421b",
+      "date_time": "2026-11-17T21:46:42.416Z",
+      "amount": 2,
+      "type": "out",
+      "reason": "2",
+      "user_id": "admin-demo",
+      "bill_id": null
     }
   ],
   "stockMovements": [
@@ -499,8 +562,8 @@
   "cashDrawers": [
     {
       "id": "drawer-main",
-      "balance": 1650,
-      "last_cash_movement": "cash-130249c1-4ea0-47a4-8073-68b7b1584db1"
+      "balance": 1444,
+      "last_cash_movement": "cash-0c03bc3a-3f5f-4897-aa7c-3e801916421b"
     }
   ]
 }
